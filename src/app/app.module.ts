@@ -5,12 +5,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { TestComponent } from './test/test.component';
+import { ListClientComponent } from './list-client/list-client.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    TestComponent
+    TestComponent,
+    ListClientComponent
   ],
   imports: [
     BrowserModule,
