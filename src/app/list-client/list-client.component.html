@@ -1,1 +1,55 @@
-<p>list-client works!</p>
+<div class="card-header border-0">
+    <div class="row">
+      <div class="col-6">
+        <h3 class="mb-0">Inline actions</h3>
+      </div>
+      <div class="col-6 text-right">
+        <a href="#" class="btn btn-sm btn-neutral btn-round btn-icon" data-toggle="tooltip" data-original-title="Edit product">
+          <span class="btn-inner--icon"><i class="fas fa-user-edit"></i></span>
+          <span class="btn-inner--text">Export</span>
+        </a>
+      </div>
+    </div>
+  </div>
+  <!-- Light table -->
+  <div class="table-responsive">
+    <table class="table align-items-center table-flush">
+      <thead class="thead-light">
+        <tr>
+          <th>Client</th>
+          <th>id</th>
+          <th>date de naissance</th>
+          <th>Adresse Mail</th>
+          <th>profession</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr for *ngFor="let c of list" >
+          <td class="table-user" >
+            <img src="../../assets/img/theme/team-1.jpg" class="avatar rounded-circle mr-3">
+            <b>{{c.prenom}} {{c.nom}}</b>
+          </td>
+          <td>
+            <span class="text-muted">{{c.idClient}}</span>
+          </td>
+          <td>
+            <a href="#!" class="font-weight-bold">{{c.dateNaissance}}</a>
+          </td>
+          <td>
+            <a href="#!" class="font-weight-bold">{{c.email}}</a>
+          </td>
+          <td>
+            <a href="#!" class="font-weight-bold">{{c.profession}}</a>
+          </td>
+          <td class="table-actions">
+            <a href="#!" class="table-action" data-toggle="tooltip" data-original-title="Edit product">
+              <i class="fas fa-user-edit"></i>
+            </a>
+            <a href="#!" class="table-action table-action-delete" data-toggle="tooltip" data-original-title="Delete product">
+              <i class="fas fa-trash"></i>
+            </a>
+         
+      </tbody>
+    </table>
+  </div>
