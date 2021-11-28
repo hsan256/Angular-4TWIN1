@@ -3,7 +3,4 @@ export class Produit {
     codeProduit :string;
     libelleProduit :string;
     prixUnitaire :number;
-    
-
-
 }
