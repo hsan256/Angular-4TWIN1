@@ -8,18 +8,18 @@ import { Produit } from '../Models/produit';
 })
 export class ProduitService {
   list: Produit[];
-  private baseURL="http://localhost:8081/SpringMVC/servlet/produit";
+  private baseURL = "http://localhost:8081/SpringMVC/servlet/produit";
   httpOptions = {
     headers: new HttpHeaders({
-    'Content-Type': 'application/json'
+      'Content-Type': 'application/json'
     })
-    }
-  constructor(private http: HttpClient) {}
+  }
+  constructor(private http: HttpClient) { }
 
   getAllProductsFormDb(): Observable<Produit[]> {
-    return this.http.get<Produit[]>(this.baseURL+'/retrieve-all-produits');
+    return this.http.get<Produit[]>(this.baseURL + '/retrieve-all-produits');
   }
-  addProduct (product: Produit): Observable<Produit> {
-    return this.http.post<Produit>(this.baseURL+'/add-produit', product, this.httpOptions);
+  addProduct(product: Produit): Observable<Produit> {
+    return this.http.post<Produit>(this.baseURL + '/add-produit', product, this.httpOptions);
   }
 }
