@@ -5,20 +5,29 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { TestComponent } from './test/test.component';
+import { AllRayonsComponent } from './all-rayons/all-rayons.component';
+
 import { ListClientComponent } from './list-client/list-client.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ListProduitComponent } from './GestionProduit/list-produit/list-produit.component';
+import { AddProduitComponent } from './GestionProduit/add-produit/add-produit.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     TestComponent,
-    ListClientComponent
+    AllRayonsComponent,
+    ListClientComponent,
+    ListProduitComponent,
+    AddProduitComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

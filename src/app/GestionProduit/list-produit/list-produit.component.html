@@ -1,0 +1,11 @@
+
+    <div class="card" style="width: 18rem;" *ngFor="let p of list">
+         <img src="../../assets/produit/IMG_3196.jpg" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">Id :{{p.idProduit}}</h5>
+            <p class="card-text">Code : {{p.codeProduit}}</p>
+            <p class="card-text">Nom : {{p.libelleProduit}}</p>
+            <p class="card-text">Prix Unitaire : {{p.prixUnitaire}}</p>
+            <a href="#" class="btn btn-primary">View Details</a>
+        </div>
+    </div>
