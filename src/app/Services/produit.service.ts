@@ -38,11 +38,12 @@ export class ProduitService {
     return this.http.delete<Produit>(url);
   }
   getProductById(id: number): Observable<Produit> {
-    return this.http.get<Produit>(this.baseURL + '/' + id);
+    return this.http.get<Produit>(this.baseURL + '/retrieve-produit/' + id);
   }
-  updateProduct(product: Produit): Observable<Produit> {
+
+  updateProduct(id: number, product: Produit): Observable<Produit> {
     return this.http.put<Produit>(
-      this.baseURL + '/modify-produit',
+      this.baseURL + '/modify-produit/' + id,
       product,
       this.httpOptions
     );

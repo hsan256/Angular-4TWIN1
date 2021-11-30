@@ -14,6 +14,7 @@ import { FormsModule } from '@angular/forms';
 import { ListRayonsComponent } from './GestionRayons/list-rayons/list-rayons.component';
 import { AddRayonComponent } from './GestionRayons/add-rayon/add-rayon.component';
 import { UpdateProduitComponent } from './GestionProduit/update-produit/update-produit.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { UpdateProduitComponent } from './GestionProduit/update-produit/update-p
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]
