@@ -1,35 +1,26 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Produit } from 'src/app/Models/produit';
 import { Rayon } from 'src/app/Models/rayon';
 import { Stock } from 'src/app/Models/stock';
 import { ProduitService } from 'src/app/Services/produit.service';
 
 @Component({
-  selector: 'app-add-produit',
-  templateUrl: './add-produit.component.html',
-  styleUrls: ['./add-produit.component.css']
+  selector: 'app-update-produit',
+  templateUrl: './update-produit.component.html',
+  styleUrls: ['./update-produit.component.css']
 })
-export class AddProduitComponent implements OnInit {
-  list: Produit[];
+export class UpdateProduitComponent implements OnInit {
   listRayon: Rayon[];
   listStock: Stock[];
-  product: Produit = new Produit();
-  constructor(private ps: ProduitService, private router: Router) {}
+  product:Produit=new Produit();
+
+  constructor(private ps :ProduitService,private router :Router, private ac : ActivatedRoute) { }
 
   ngOnInit(): void {
     this.getAllRayons();
     this.getAllStocks();
   }
-  save() {
-    this.product;
-    this.ps.addProduct(this.product).subscribe((res) => {
-      console.log('Product created!');
-      this.router.navigate(['/listproduit']);
-      
-    });
-  }
-
   getAllRayons() {
     this.ps.getAllRayonsFormDb().subscribe(
       (res) => {
@@ -43,6 +34,15 @@ export class AddProduitComponent implements OnInit {
       (res) => {
         console.log(res);
         this.listStock = res;
+      }
+    );
+  }
+  save(){
+    console.log(this.product);
+    this.ps.updateProduct(this.product).subscribe(
+
+      res=>{
+        this.router.navigate(['/listproduit']);
       }
     );
   }

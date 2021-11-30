@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Produit } from '../../Models/produit';
 import { ProduitService } from '../../Services/produit.service';
 
@@ -10,7 +11,7 @@ import { ProduitService } from '../../Services/produit.service';
 export class ListProduitComponent implements OnInit {
   list: Produit[];
   produit: Produit = new Produit();
-  constructor(private ps:ProduitService) { }
+  constructor(private ps:ProduitService,private router : Router) { }
 
   ngOnInit(): void {
     this.getAllProducts();
@@ -23,6 +24,15 @@ export class ListProduitComponent implements OnInit {
         this.list = res;
       }
     );
+  }
+  deleteProduct(i: number) {
+    this.ps.deleteProduct(i).subscribe((res) => {
+      console.log(res);
+      this.getAllProducts();
+    });
+  }
+  Modifier(id: number) {
+    this.router.navigate(['/updateproduit']);
   }
   
 

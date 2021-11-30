@@ -12,6 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ListProduitComponent } from './GestionProduit/list-produit/list-produit.component';
 import { AddProduitComponent } from './GestionProduit/add-produit/add-produit.component';
 import { FormsModule } from '@angular/forms';
+import { UpdateProduitComponent } from './GestionProduit/update-produit/update-produit.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { FormsModule } from '@angular/forms';
     AllRayonsComponent,
     ListClientComponent,
     ListProduitComponent,
-    AddProduitComponent
+    AddProduitComponent,
+    UpdateProduitComponent
   ],
   imports: [
     BrowserModule,

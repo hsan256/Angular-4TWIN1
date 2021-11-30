@@ -1,0 +1,27 @@
+<form #f="ngForm" (submit)="save()">
+    <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">codeProduit</label>
+        <input name="code" [(ngModel)]="product.codeProduit" #first="ngModel" type="text" class="form-control">
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Libelle</label>
+        <input name="libelle" [(ngModel)]="product.libelleProduit" #first="ngModel" type="text" class="form-control">
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Prix unitaire</label>
+        <input name="prixUnitaire" [(ngModel)]="product.prixUnitaire" #first="ngModel" type="text" class="form-control">
+    </div>
+    <div class="mb-3">
+        <label  class="form-label">Rayon</label>
+        <select  name="rayon" class="form-control" [(ngModel)]="product.rayon" #rayon="ngModel">
+            <option *ngFor="let r of listRayon" [ngValue]="r">{{r.libelleRayon}}</option>
+        </select>
+    </div>
+    <div class="mb-3">
+        <label  class="form-label">Stock</label>
+        <select  name="stock" class="form-control" [(ngModel)]="product.stock" #rayon="ngModel">
+            <option *ngFor="let s of listStock" [ngValue]="s">{{s.libelleStock}}</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
