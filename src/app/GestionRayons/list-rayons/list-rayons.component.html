@@ -1,5 +1,5 @@
 <div class="text-right p-3">
-	<button class="btn btn-success" (click)="createRayonRequest()">Crée un rayon</button>
+	<button class="btn btn-success" (click)="open(mymodal)">Crée un rayon</button>
 </div>
 <div class="table-responsive">
 	<table class="table align-items-center table-flush">
@@ -74,3 +74,46 @@
 		</ul>
 	</nav>
 </div>
+
+<ng-template #mymodal let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">Crée un Rayon</h4>
+		<button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+			<span aria-hidden="true">×</span>
+		</button>
+	</div>
+
+	<div class="modal-body">
+		<div class="alert alert-danger" *ngIf="errorMessage">
+			<strong>Error!</strong>
+			{{errorMessage}}
+		</div>
+
+		<form class="new-event--form" #f="ngForm" (ngSubmit)="f.form.valid && saveRayon()">
+			<div class="form-group">
+				<label for="code">
+					Code Rayon</label>
+				<input type="text" id="code" placeholder="Code Rayon" name="code" class="form-control form-control-alternative" [(ngModel)]="rayon.codeRayon" #code="ngModel" required/>
+				<div class="alert alert-danger mt-3" *ngIf="code.invalid && code.touched">
+					<small *ngIf="code.errors.required">Code Rayon is a required field</small>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label for="libelle">
+					Libelle Rayon</label>
+				<input type="text" id="libelle" placeholder="Libelle Rayon" name="libelle" class="form-control form-control-alternative" [(ngModel)]="rayon.libelleRayon" #libelle="ngModel" required/>
+				<div class="alert alert-danger mt-3" *ngIf="libelle.invalid && libelle.touched">
+					<small *ngIf="libelle.errors.required">Libelle Rayon is a required field</small>
+				</div>
+			</div>
+
+			<input type="hidden" class="new-event--start"/>
+			<input type="hidden" class="new-event--end"/>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-success" [disabled]="f.invalid" (click)="saveRayon()">Save</button>
+			</div>
+		</form>
+	</div>
+</ng-template>
+

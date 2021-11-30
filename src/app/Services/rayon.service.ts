@@ -24,7 +24,7 @@ export class RayonService {
     return this.http.get<Rayon[]>(this.baseURL + '/retrieve-all-rayons');
   }
   addRayon(rayon: Rayon): Observable<Rayon> {
-    return this.http.post<Rayon>(this.baseURL + '/hsantrabelsi', rayon, this.httpOptions);
+    return this.http.post<Rayon>(this.baseURL + '/add-rayon', rayon, this.httpOptions);
   }
   deleteRayon(rayon: Rayon): Observable<any> {
     return this.http.delete<Rayon>(this.baseURL + '/remove-rayon/'+ rayon.idRayon);
