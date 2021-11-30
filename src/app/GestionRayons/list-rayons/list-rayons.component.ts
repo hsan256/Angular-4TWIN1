@@ -37,6 +37,16 @@ export class ListRayonsComponent implements OnInit {
 
   saveRayon() {
     this.rayonService.addRayon(this.rayon).subscribe(data => {
+      this.save.emit(data);
+      this.ngOnInit();
+    }, err => {
+      this.errorMessage = 'Unexpected error occurred.';
+      console.log(err);
+    })
+  }
+
+  editRayon() {
+    this.rayonService.editRayon(this.rayon).subscribe(data => {
       this.ngOnInit();
     }, err => {
       this.errorMessage = 'Unexpected error occurred.';
@@ -45,6 +55,15 @@ export class ListRayonsComponent implements OnInit {
   }
 
   open(content) {
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+  
+  openedit(content, item:Rayon) {
+    this.rayon = Object.assign({}, item);
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {

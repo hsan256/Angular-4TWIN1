@@ -29,16 +29,13 @@
 				<td class="budget">
 					{{item.libelleRayon}}
 				</td>
-				<td class="text-right">
-					<div class="dropdown">
-						<a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							<i class="fas fa-ellipsis-v"></i>
-						</a>
-						<div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-							<a class="dropdown-item" (click)="deleteRayon(item, item.idRayon)">Supprimer</a>
-							<a class="dropdown-item" href="#">Modifier</a>
-						</div>
-					</div>
+				<td class="">
+					<a (click)="openedit(edit, item)" class="table-action">
+						<i class="fas fa-edit"></i>
+					</a>
+					<a (click)="deleteRayon(item, item.idRayon)" class="table-action table-action-delete">
+						<i class="fas fa-trash" style="color:red;"></i>
+					</a>
 				</td>
 			</tr>
 		</tbody>
@@ -74,6 +71,48 @@
 		</ul>
 	</nav>
 </div>
+
+<ng-template #edit let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">Editer un Rayon</h4>
+		<button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+			<span aria-hidden="true">×</span>
+		</button>
+	</div>
+
+	<div class="modal-body">
+		<div class="alert alert-danger" *ngIf="errorMessage">
+			<strong>Error!</strong>
+			{{errorMessage}}
+		</div>
+
+		<form class="new-event--form" #f="ngForm" (ngSubmit)="f.form.valid && saveRayon()">
+			<div class="form-group">
+				<label for="code">
+					Code Rayon</label>
+				<input type="text" id="code" placeholder="Code Rayon" name="code" class="form-control form-control-alternative" [(ngModel)]="rayon.codeRayon" #code="ngModel" required/>
+				<div class="alert alert-danger mt-3" *ngIf="code.invalid && code.touched">
+					<small *ngIf="code.errors.required">Code Rayon is a required field</small>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label for="libelle">
+					Libelle Rayon</label>
+				<input type="text" id="libelle" placeholder="Libelle Rayon" name="libelle" class="form-control form-control-alternative" [(ngModel)]="rayon.libelleRayon" #libelle="ngModel" required/>
+				<div class="alert alert-danger mt-3" *ngIf="libelle.invalid && libelle.touched">
+					<small *ngIf="libelle.errors.required">Libelle Rayon is a required field</small>
+				</div>
+			</div>
+
+			<input type="hidden" class="new-event--start"/>
+			<input type="hidden" class="new-event--end"/>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-success" [disabled]="f.invalid" (click)="editRayon()">Save</button>
+			</div>
+		</form>
+	</div>
+</ng-template>
 
 <ng-template #mymodal let-modal>
 	<div class="modal-header">

@@ -29,4 +29,7 @@ export class RayonService {
   deleteRayon(rayon: Rayon): Observable<any> {
     return this.http.delete<Rayon>(this.baseURL + '/remove-rayon/'+ rayon.idRayon);
   }
+  editRayon(rayon: Rayon): Observable<any> {
+    return this.http.put<Rayon>(this.baseURL + '/modify-rayon', rayon, this.httpOptions);
+  }
 }
