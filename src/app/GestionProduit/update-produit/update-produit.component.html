@@ -35,50 +35,7 @@
                     <option *ngFor="let s of listStock" [ngValue]="s">{{s.libelleStock}}</option>
                 </select>
             </div>
-            <button type="submit" class="btn btn-primary" (click)="open(mymodal)">Ajouter votre produit</button>
+            <button class="btn btn-primary">Update</button>
         </form>
     </div>
 </div>
-
-<ng-template #mymodal let-modal>
-    <div class="modal-header">
-        <h4 class="modal-title" id="modal-basic-title">Bootstrap Modal</h4>
-        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-            <span aria-hidden="true">×</span>
-        </button>
-    </div>
-    <div class="card">
-        <!-- Card header -->
-        <div class="card-header">
-            <h3 class="mb-0">Add Detail Produit</h3>
-        </div>
-        <!-- Card body -->
-        <div class="card-body">
-            <form #f="ngForm" (submit)="saveDetailProduit()">
-                <div class="form-group">
-                    <label class="form-control-label" for="exampleFormControlInput1">Date de Creation</label>
-                    <input name="dateCeation" [(ngModel)]="detailproduct.datecreation" #first="ngModel"
-                        class="form-control" type="date" id="example-date-input">
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" for="exampleFormControlInput1">date de Derniere
-                        Modification</label>
-                    <input name="dateDerniereModification" [(ngModel)]="detailproduct.dateDernierModification"
-                        #first="ngModel" class="form-control" type="date" id="example-date-input">
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label" for="exampleFormControlInput1">Categorie Produit</label>
-                    <select class="form-control" id="exampleFormControlSelect1" name="categorieProduit" [(ngModel)]="detailproduct.categorieProduit">
-                        <option selected>ELECTOMENAGER</option>
-                        <option>ALIMENTAIRE</option>
-                        <option>QUINCAILLERIE</option>
-                    </select>
-                </div>
-                <button type="submit" class="btn btn-primary" (click)="modal.close('Save click')">Ajouter detail de votr
-                    produit</button>
-            </form>
-        </div>
-    </div>
-
-
-</ng-template>
