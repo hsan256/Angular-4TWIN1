@@ -30,9 +30,11 @@
             <p class="card-text">Nom : {{productToShow.libelleProduit}}</p>
             <p class="card-text">Prix Unitaire : {{productToShow.prixUnitaire}}</p>
             <div>
-                
-                <button class="btn btn-sm btn-warning" (click)="modal.close('Save click')" (click)="Modifier(productToShow.idProduit)"   >Update</button>
-                <button class="btn btn-sm btn-danger" (click)="modal.close('Save click')" (click)="deleteProduct(productToShow.idProduit)">Delete</button>
+
+                <button class="btn btn-sm btn-warning" (click)="modal.close('Save click')"
+                    (click)="Modifier(productToShow.idProduit)">Update</button>
+                <button class="btn btn-sm btn-danger" (click)="modal.close('Save click')"
+                    (click)="deleteProduct(productToShow.idProduit)">Delete</button>
             </div>
         </div>
     </div>
