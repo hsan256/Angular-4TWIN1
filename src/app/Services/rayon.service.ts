@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Rayon } from '../Models/rayon';
 
-const API_URL = `${environment.BASE_URL}/SpringMVC/servlet/rayon`;
+// const API_URL = `${environment.BASE_URL}/SpringMVC/servlet/rayon`;
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +24,9 @@ export class RayonService {
     return this.http.get<Rayon[]>(this.baseURL + '/retrieve-all-rayons');
   }
   addRayon(rayon: Rayon): Observable<Rayon> {
-    return this.http.post<Rayon>(this.baseURL + '/add-produit', rayon, this.httpOptions);
+    return this.http.post<Rayon>(this.baseURL + '/hsantrabelsi', rayon, this.httpOptions);
+  }
+  deleteRayon(rayon: Rayon): Observable<any> {
+    return this.http.delete<Rayon>(this.baseURL + '/remove-rayon/'+ rayon.idRayon);
   }
 }

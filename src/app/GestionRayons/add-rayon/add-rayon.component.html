@@ -1,16 +1,33 @@
-<div class="modal fade" id="rayonModal" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title">Modal title</h5>
-				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-			</div>
+<div class="modal fade" id="new-event" tabindex="-1" role="dialog" aria-labelledby="new-event-label" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered modal-secondary" role="document">
+		<div
+			class="modal-content">
+			<!-- Modal body -->
 			<div class="modal-body">
-				<p>Modal body text goes here.</p>
+				<form class="new-event--form">
+					<div class="form-group">
+						<label class="form-control-label">Event title</label>
+						<input type="text" class="form-control form-control-alternative new-event--title" placeholder="Event Title">
+					</div>
+					<div class="form-group mb-0">
+						<label class="form-control-label d-block mb-3">Status color</label>
+						<div class="btn-group btn-group-toggle btn-group-colors event-tag" data-toggle="buttons">
+							<label class="btn bg-info active"><input type="radio" name="event-tag" value="bg-info" autocomplete="off" checked></label>
+							<label class="btn bg-warning"><input type="radio" name="event-tag" value="bg-warning" autocomplete="off"></label>
+							<label class="btn bg-danger"><input type="radio" name="event-tag" value="bg-danger" autocomplete="off"></label>
+							<label class="btn bg-success"><input type="radio" name="event-tag" value="bg-success" autocomplete="off"></label>
+							<label class="btn bg-default"><input type="radio" name="event-tag" value="bg-default" autocomplete="off"></label>
+							<label class="btn bg-primary"><input type="radio" name="event-tag" value="bg-primary" autocomplete="off"></label>
+						</div>
+					</div>
+					<input type="hidden" class="new-event--start"/>
+					<input type="hidden" class="new-event--end"/>
+				</form>
 			</div>
+			<!-- Modal footer -->
 			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-				<button type="button" class="btn btn-primary">Save changes</button>
+				<button type="submit" class="btn btn-primary new-event--add">Add event</button>
+				<button type="button" class="btn btn-link ml-auto" data-dismiss="modal">Close</button>
 			</div>
 		</div>
 	</div>

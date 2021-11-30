@@ -13,6 +13,7 @@ import { AddProduitComponent } from './GestionProduit/add-produit/add-produit.co
 import { FormsModule } from '@angular/forms';
 import { ListRayonsComponent } from './GestionRayons/list-rayons/list-rayons.component';
 import { AddRayonComponent } from './GestionRayons/add-rayon/add-rayon.component';
+import { UpdateProduitComponent } from './GestionProduit/update-produit/update-produit.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { AddRayonComponent } from './GestionRayons/add-rayon/add-rayon.component
     AddProduitComponent,
     ListRayonsComponent,
     AddRayonComponent,
+    UpdateProduitComponent
   ],
   imports: [
     BrowserModule,

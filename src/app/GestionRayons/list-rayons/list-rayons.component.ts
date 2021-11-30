@@ -11,6 +11,7 @@ import { AddRayonComponent } from '../add-rayon/add-rayon.component';
 export class ListRayonsComponent implements OnInit {
 
   rayonsList: Array<Rayon> = [];
+  errorMessage: string = "";
   
   @ViewChild(AddRayonComponent) child: AddRayonComponent | undefined;
 
@@ -24,6 +25,16 @@ export class ListRayonsComponent implements OnInit {
 
   createRayonRequest(){
     this.child?.showRayonModal();
+  }
+
+  deleteRayon(item: Rayon, id: number){
+    this.rayonService.deleteRayon(item).subscribe(data => {
+      this.rayonsList.splice(id, 1);
+      this.ngOnInit();
+    }, err => {
+      this.errorMessage = 'Unexpected error occured';
+      console.log(err);
+    })
   }
 
 }

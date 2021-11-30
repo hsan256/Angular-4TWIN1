@@ -11,26 +11,23 @@ declare var $: any;
 })
 export class AddRayonComponent {
 
-  @Input() rayon: Rayon = new Rayon();
-  @Output() save = new EventEmitter<any>();
   errorMessage: string = "";
 
+  @Input() rayon: Rayon = new Rayon();
+  @Output() save = new EventEmitter<any>();
   constructor(private rayonService: RayonService) { }
 
   saveRayon() {
     this.rayonService.addRayon(this.rayon).subscribe(data => {
       this.save.emit(data);
-      $('#rayonModal').modal('hide');
+      $('#new-event').modal('hide');
     }, err => {
-      this.errorMessage = 'Unexpected error occured';
-      console.log(err)
+      this.errorMessage = 'Unexpected error occurred.';
+      console.log(err);
     })
   }
 
   showRayonModal() {
-    $(document).ready(function(){
-      $('#rayonModal').modal({show:true});
-    });
+    $('#new-event').modal('show');
   }
-
 }
