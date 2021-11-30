@@ -8,42 +8,47 @@ import { ProduitService } from 'src/app/Services/produit.service';
 @Component({
   selector: 'app-update-produit',
   templateUrl: './update-produit.component.html',
-  styleUrls: ['./update-produit.component.css']
+  styleUrls: ['./update-produit.component.css'],
 })
 export class UpdateProduitComponent implements OnInit {
   listRayon: Rayon[];
   listStock: Stock[];
-  product:Produit=new Produit();
+  product: Produit = new Produit();
 
-  constructor(private ps :ProduitService,private router :Router, private ac : ActivatedRoute) { }
+  constructor(
+    private ps: ProduitService,
+    private router: Router,
+    private ac: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
+    this.ac.paramMap.subscribe(
+      (next) =>
+        this.ps.getProductById(Number(next.get('id'))).subscribe((res) => {
+          this.product = res;
+        }),
+      (error) => console.log(error)
+    );
     this.getAllRayons();
     this.getAllStocks();
   }
   getAllRayons() {
-    this.ps.getAllRayonsFormDb().subscribe(
-      (res) => {
-        console.log(res);
-        this.listRayon = res;
-      }
-    );
+    this.ps.getAllRayonsFormDb().subscribe((res) => {
+      console.log(res);
+      this.listRayon = res;
+    });
   }
   getAllStocks() {
-    this.ps.getAllStocksFormDb().subscribe(
-      (res) => {
-        console.log(res);
-        this.listStock = res;
-      }
-    );
+    this.ps.getAllStocksFormDb().subscribe((res) => {
+      console.log(res);
+      this.listStock = res;
+    });
   }
-  save(){
-    console.log(this.product);
-    this.ps.updateProduct(this.product).subscribe(
-
-      res=>{
+  save() {
+    this.ps
+      .updateProduct(this.product.idProduit, this.product)
+      .subscribe((res) => {
         this.router.navigate(['/listproduit']);
-      }
-    );
+      });
   }
 }

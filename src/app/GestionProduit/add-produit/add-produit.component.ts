@@ -8,7 +8,7 @@ import { ProduitService } from 'src/app/Services/produit.service';
 @Component({
   selector: 'app-add-produit',
   templateUrl: './add-produit.component.html',
-  styleUrls: ['./add-produit.component.css']
+  styleUrls: ['./add-produit.component.css'],
 })
 export class AddProduitComponent implements OnInit {
   list: Produit[];
@@ -26,24 +26,19 @@ export class AddProduitComponent implements OnInit {
     this.ps.addProduct(this.product).subscribe((res) => {
       console.log('Product created!');
       this.router.navigate(['/listproduit']);
-      
     });
   }
 
   getAllRayons() {
-    this.ps.getAllRayonsFormDb().subscribe(
-      (res) => {
-        console.log(res);
-        this.listRayon = res;
-      }
-    );
+    this.ps.getAllRayonsFormDb().subscribe((res) => {
+      console.log(res);
+      this.listRayon = res;
+    });
   }
   getAllStocks() {
-    this.ps.getAllStocksFormDb().subscribe(
-      (res) => {
-        console.log(res);
-        this.listStock = res;
-      }
-    );
+    this.ps.getAllStocksFormDb().subscribe((res) => {
+      console.log(res);
+      this.listStock = res;
+    });
   }
 }

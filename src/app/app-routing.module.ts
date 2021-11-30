@@ -13,7 +13,9 @@ const routes: Routes = [
   {path:"listclient", component:ListClientComponent},
   {path:"listproduit", component:ListProduitComponent},
   {path:"addproduit", component:AddProduitComponent},
-  {path:"updateproduit", component:UpdateProduitComponent},
+  {path:"updateproduit/:id", component:UpdateProduitComponent},
+  
+
 
   {path:"", redirectTo:"home", pathMatch:"full"},
   

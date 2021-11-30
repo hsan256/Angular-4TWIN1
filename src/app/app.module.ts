@@ -13,6 +13,7 @@ import { ListProduitComponent } from './GestionProduit/list-produit/list-produit
 import { AddProduitComponent } from './GestionProduit/add-produit/add-produit.component';
 import { FormsModule } from '@angular/forms';
 import { UpdateProduitComponent } from './GestionProduit/update-produit/update-produit.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -23,13 +24,14 @@ import { UpdateProduitComponent } from './GestionProduit/update-produit/update-p
     ListClientComponent,
     ListProduitComponent,
     AddProduitComponent,
-    UpdateProduitComponent
+    UpdateProduitComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]
