@@ -1,6 +1,9 @@
+import { Produit } from "./produit";
+
 export class DetailProduit {
   idDetailProduit: number;
-  dateCeation: Date;
-  dateDerniereModification: Date;
+  datecreation: Date;
+  dateDernierModification: Date;
   categorieProduit: string;
+  produit :Produit;
 }

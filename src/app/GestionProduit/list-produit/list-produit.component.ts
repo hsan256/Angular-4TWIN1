@@ -4,7 +4,6 @@ import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Produit } from '../../Models/produit';
 import { ProduitService } from '../../Services/produit.service';
 
-
 @Component({
   selector: 'app-list-produit',
   templateUrl: './list-produit.component.html',
@@ -12,13 +11,17 @@ import { ProduitService } from '../../Services/produit.service';
 })
 export class ListProduitComponent implements OnInit {
   title = 'appBootstrap';
-  
+
   closeResult: string;
 
   list: Produit[];
   produit: Produit = new Produit();
   productToShow: Produit = new Produit();
-  constructor(private ps: ProduitService, private router: Router,private modalService: NgbModal) {}
+  constructor(
+    private ps: ProduitService,
+    private router: Router,
+    private modalService: NgbModal
+  ) {}
 
   ngOnInit(): void {
     this.getAllProducts();
@@ -37,27 +40,30 @@ export class ListProduitComponent implements OnInit {
     });
   }
   Modifier(id: number) {
-    this.router.navigate(['/updateproduit',id]);
+    this.router.navigate(['/updateproduit', id]);
   }
-  
 
-
-  open(content,p:Produit) {
-    this.productToShow=p;
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
+  open(content, p: Produit) {
+    this.productToShow = p;
+    this.modalService
+      .open(content, { ariaLabelledBy: 'modal-basic-title' })
+      .result.then(
+        (result) => {
+          this.closeResult = `Closed with: ${result}`;
+        },
+        (reason) => {
+          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+        }
+      );
   }
-  
+
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
       return 'by pressing ESC';
     } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
       return 'by clicking on a backdrop';
     } else {
-      return  `with: ${reason}`;
+      return `with: ${reason}`;
     }
   }
 }
