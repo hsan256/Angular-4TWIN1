@@ -1,6 +1,30 @@
-<div class="text-right p-3">
-	<button class="btn btn-success" (click)="open(mymodal)">Crée un rayon</button>
+<div class="container">
+	<div class="row">
+		<div
+			class="col-md-6">
+			<!-- Search form -->
+			<form class="navbar-search navbar-search-light form-inline mr-sm-3 mt-3" id="navbar-search-main">
+				<div class="form-group">
+					<div class="input-group input-group-alternative input-group-merge">
+						<div class="input-group-prepend">
+							<span class="input-group-text">
+								<i class="fas fa-search"></i>
+							</span>
+						</div>
+						<input class="form-control" placeholder="Search" type="text" name="idRayon" [(ngModel)]="idRayon" (ngModelChange)="Search()">
+					</div>
+				</div>
+			</form>
+		</div>
+		<div class="col-md-6">
+			<div class="text-right p-3">
+				<button class="btn btn-success" (click)="open(mymodal)">Crée un rayon</button>
+			</div>
+		</div>
+	</div>
 </div>
+<!-- Navbar links -->
+
 <div class="table-responsive">
 	<table class="table align-items-center table-flush">
 		<thead class="thead-light">
@@ -15,9 +39,9 @@
 			<tr *ngFor="let item of rayonsList; index as ind">
 				<th scope="row">
 					<div class="media align-items-center">
-						<a href="#" class="avatar rounded-circle mr-3">
+						<!--<a href="#" class="avatar rounded-circle mr-3">
 							<img alt="Image placeholder" src="../../assets/img/theme/bootstrap.jpg">
-						</a>
+						</a> -->
 						<div class="media-body">
 							<span class="name mb-0 text-sm">{{item.idRayon}}</span>
 						</div>

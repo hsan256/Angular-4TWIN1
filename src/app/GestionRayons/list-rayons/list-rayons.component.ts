@@ -8,11 +8,13 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
   templateUrl: './list-rayons.component.html',
   styleUrls: ['./list-rayons.component.css']
 })
+
 export class ListRayonsComponent implements OnInit {
 
   rayonsList: Array<Rayon> = [];
   errorMessage: string = "";
   closeResult: string;
+  idRayon: any;
 
   rayon: Rayon = new Rayon();
   save = new EventEmitter<any>();
@@ -78,6 +80,16 @@ export class ListRayonsComponent implements OnInit {
       return 'by clicking on a backdrop';
     } else {
       return `with: ${reason}`;
+    }
+  }
+
+  Search(){
+    if(this.idRayon == ""){
+      this.ngOnInit()
+    }else{
+      this.rayonsList = this.rayonsList.filter(res =>{
+        return res.idRayon.toLocaleString().match(this.idRayon.toLocaleLowerCase())
+      })
     }
   }
 }

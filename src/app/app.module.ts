@@ -15,6 +15,7 @@ import { ListRayonsComponent } from './GestionRayons/list-rayons/list-rayons.com
 import { AddRayonComponent } from './GestionRayons/add-rayon/add-rayon.component';
 import { UpdateProduitComponent } from './GestionProduit/update-produit/update-produit.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 @NgModule({
   declarations: [
@@ -26,14 +27,15 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     AddProduitComponent,
     ListRayonsComponent,
     AddRayonComponent,
-    UpdateProduitComponent
+    UpdateProduitComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    NgbModule
+    NgbModule,
+    Ng2SearchPipeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
