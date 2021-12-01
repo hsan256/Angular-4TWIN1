@@ -1,3 +1,11 @@
+<div class="form-group mb-1">
+    <div class="input-group input-group-alternative input-group-merge">
+        <div class="input-group-prepend">
+            <span class="input-group-text"><i class="fas fa-search"></i></span>
+        </div>
+        <input class="form-control" placeholder="Search" type="text"[(ngModel)]="SearchVal" (keyup)="Search()">
+    </div>
+</div>
 <div class="card" style="width: 18rem;" *ngFor="let p of list">
     <img src="../../assets/produit/IMG_3196.jpg" class="card-img-top" alt="...">
     <div class="card-body">
@@ -33,7 +41,7 @@
             <p class="card-text">categorie Produit : {{detailproduct.categorieProduit}}</p>
             <div>
                 <button class="btn btn-sm btn-warning" (click)="modal.close('Save click')"
-                    (click)="Modifier(productToShow.idProduit)">Update</button>
+                    (click)="ModifierDetailProduit(detailproduct.idDetailProduit)">Update Detail Produit</button>
                 <button class="btn btn-sm btn-danger" (click)="modal.close('Save click')"
                     (click)="deleteProduct(productToShow.idProduit)">Delete</button>
             </div>

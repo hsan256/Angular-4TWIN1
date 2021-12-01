@@ -6,6 +6,7 @@ import { ListProduitComponent } from './GestionProduit/list-produit/list-produit
 import { TestComponent } from './test/test.component';
 import { AddProduitComponent } from './GestionProduit/add-produit/add-produit.component';
 import { UpdateProduitComponent } from './GestionProduit/update-produit/update-produit.component';
+import { UpdateDetailProduitComponent } from './GestionProduit/update-detail-produit/update-detail-produit.component';
 
 const routes: Routes = [
   {path:"home", component:TestComponent},
@@ -14,6 +15,8 @@ const routes: Routes = [
   {path:"listproduit", component:ListProduitComponent},
   {path:"addproduit", component:AddProduitComponent},
   {path:"updateproduit/:id", component:UpdateProduitComponent},
+  {path:"updatedetailproduit/:id", component:UpdateDetailProduitComponent},
+
   
 
 

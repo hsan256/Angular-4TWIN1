@@ -15,6 +15,7 @@ export class ListProduitComponent implements OnInit {
   title = 'appBootstrap';
 
   closeResult: string;
+  SearchVal: string = '';
 
   list: Produit[];
   listDetailProduit: DetailProduit[];
@@ -41,9 +42,20 @@ export class ListProduitComponent implements OnInit {
     });
   }
   deleteProduct(i: number) {
-    this.ps.deleteProduct(i).subscribe((res) => {
+    this.ds.getDetailProductByIdProduit(i).subscribe((res) => {
       console.log(res);
-      this.getAllProducts();
+      this.detailproduct = res;
+
+      this.ds
+        .deleteDetailProduct(this.detailproduct.idDetailProduit)
+        .subscribe((res) => {
+          console.log(res);
+          this.ps.deleteProduct(i).subscribe((res) => {
+            console.log(res);
+            this.getAllProducts();
+            this.router.navigate(['/listproduit']);
+          });
+        });
     });
   }
   Modifier(id: number) {
@@ -54,6 +66,24 @@ export class ListProduitComponent implements OnInit {
       console.log(res);
       this.detailproduct = res;
     });
+  }
+  ModifierDetailProduit(id: number) {
+    this.router.navigate(['/updatedetailproduit', id]);
+  }
+  deleteDetailProduct(i: number) {
+    this.ds.deleteDetailProduct(i).subscribe((res) => {
+      console.log(res);
+    });
+  }
+
+  Search() {
+    if (this.SearchVal === '') {
+      this.getAllProducts();
+    } else {
+      this.ps.SearchProductByName(this.SearchVal).subscribe((res) => {
+        this.list = res;
+      });
+    }
   }
   open(content, p: Produit) {
     this.detailproduct = new DetailProduit();
