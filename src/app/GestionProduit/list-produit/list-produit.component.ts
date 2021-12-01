@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { DetailProduit } from 'src/app/Models/detail-produit';
+import { DetailProduitService } from 'src/app/Services/detail-produit.service';
 import { Produit } from '../../Models/produit';
 import { ProduitService } from '../../Services/produit.service';
 
@@ -13,12 +15,18 @@ export class ListProduitComponent implements OnInit {
   title = 'appBootstrap';
 
   closeResult: string;
+  SearchVal: string = '';
 
   list: Produit[];
+  listDetailProduit: DetailProduit[];
+
   produit: Produit = new Produit();
+  detailproduct: DetailProduit = new DetailProduit();
+
   productToShow: Produit = new Produit();
   constructor(
     private ps: ProduitService,
+    private ds: DetailProduitService,
     private router: Router,
     private modalService: NgbModal
   ) {}
@@ -34,16 +42,52 @@ export class ListProduitComponent implements OnInit {
     });
   }
   deleteProduct(i: number) {
-    this.ps.deleteProduct(i).subscribe((res) => {
+    this.ds.getDetailProductByIdProduit(i).subscribe((res) => {
       console.log(res);
-      this.getAllProducts();
+      this.detailproduct = res;
+
+      this.ds
+        .deleteDetailProduct(this.detailproduct.idDetailProduit)
+        .subscribe((res) => {
+          console.log(res);
+          this.ps.deleteProduct(i).subscribe((res) => {
+            console.log(res);
+            this.getAllProducts();
+            this.router.navigate(['/listproduit']);
+          });
+        });
     });
   }
   Modifier(id: number) {
     this.router.navigate(['/updateproduit', id]);
   }
+  getDetailProductByidProduit(id: number) {
+    this.ds.getDetailProductByIdProduit(id).subscribe((res) => {
+      console.log(res);
+      this.detailproduct = res;
+    });
+  }
+  ModifierDetailProduit(id: number) {
+    this.router.navigate(['/updatedetailproduit', id]);
+  }
+  deleteDetailProduct(i: number) {
+    this.ds.deleteDetailProduct(i).subscribe((res) => {
+      console.log(res);
+    });
+  }
 
+  Search() {
+    if (this.SearchVal === '') {
+      this.getAllProducts();
+    } else {
+      this.ps.SearchProductByName(this.SearchVal).subscribe((res) => {
+        this.list = res;
+      });
+    }
+  }
   open(content, p: Produit) {
+    this.detailproduct = new DetailProduit();
+    this.getDetailProductByidProduit(p.idProduit);
     this.productToShow = p;
     this.modalService
       .open(content, { ariaLabelledBy: 'modal-basic-title' })

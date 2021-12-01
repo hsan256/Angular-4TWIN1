@@ -23,4 +23,23 @@ export class DetailProduitService {
       this.httpOptions
     );
   }
+  getDetailProductByIdProduit(id: number): Observable<DetailProduit> {
+    return this.http.get<DetailProduit>(this.baseURL + '/retrieve-detailproduitByidProduit/' + id);
+  }
+  getDetailProductById(id: number): Observable<DetailProduit> {
+    return this.http.get<DetailProduit>(this.baseURL + '/retrieve-detailproduit/' + id);
+  }
+  updateDetailProduct(id: number, detailproduct: DetailProduit): Observable<DetailProduit> {
+    return this.http.put<DetailProduit>(
+      this.baseURL + '/modify-detailproduit',
+      detailproduct,
+      this.httpOptions
+    );
+  }
+  deleteDetailProduct(detailProduit: DetailProduit | number): Observable<DetailProduit> {
+    const id = typeof detailProduit === 'number' ? detailProduit : detailProduit.idDetailProduit;
+    const url = this.baseURL + '/remove-detailproduit/' + id;
+    return this.http.delete<DetailProduit>(url);
+  }
+
 }

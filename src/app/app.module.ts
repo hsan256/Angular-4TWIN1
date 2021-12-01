@@ -14,6 +14,7 @@ import { AddProduitComponent } from './GestionProduit/add-produit/add-produit.co
 import { FormsModule } from '@angular/forms';
 import { UpdateProduitComponent } from './GestionProduit/update-produit/update-produit.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { UpdateDetailProduitComponent } from './GestionProduit/update-detail-produit/update-detail-produit.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ListProduitComponent,
     AddProduitComponent,
     UpdateProduitComponent,
+    UpdateDetailProduitComponent,
   ],
   imports: [
     BrowserModule,

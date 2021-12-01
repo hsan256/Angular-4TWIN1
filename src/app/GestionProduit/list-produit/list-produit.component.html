@@ -1,3 +1,11 @@
+<div class="form-group mb-1">
+    <div class="input-group input-group-alternative input-group-merge">
+        <div class="input-group-prepend">
+            <span class="input-group-text"><i class="fas fa-search"></i></span>
+        </div>
+        <input class="form-control" placeholder="Search" type="text"[(ngModel)]="SearchVal" (keyup)="Search()">
+    </div>
+</div>
 <div class="card" style="width: 18rem;" *ngFor="let p of list">
     <img src="../../assets/produit/IMG_3196.jpg" class="card-img-top" alt="...">
     <div class="card-body">
@@ -17,7 +25,7 @@
 
 <ng-template #mymodal let-modal>
     <div class="modal-header">
-        <h4 class="modal-title" id="modal-basic-title">Bootstrap Modal</h4>
+        <h4 class="modal-title" id="modal-basic-title">{{productToShow.libelleProduit}}</h4>
         <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
             <span aria-hidden="true">×</span>
         </button>
@@ -27,11 +35,13 @@
         <div class="card-body">
             <h5 class="card-title">Id :{{productToShow.idProduit}}</h5>
             <p class="card-text">Code : {{productToShow.codeProduit}}</p>
-            <p class="card-text">Nom : {{productToShow.libelleProduit}}</p>
             <p class="card-text">Prix Unitaire : {{productToShow.prixUnitaire}}</p>
+            <p class="card-text">Creation : {{detailproduct.datecreation}}</p>
+            <p class="card-text">Dernier Modification : {{detailproduct.dateDernierModification}}</p>
+            <p class="card-text">categorie Produit : {{detailproduct.categorieProduit}}</p>
             <div>
                 <button class="btn btn-sm btn-warning" (click)="modal.close('Save click')"
-                    (click)="Modifier(productToShow.idProduit)">Update</button>
+                    (click)="ModifierDetailProduit(detailproduct.idDetailProduit)">Update Detail Produit</button>
                 <button class="btn btn-sm btn-danger" (click)="modal.close('Save click')"
                     (click)="deleteProduct(productToShow.idProduit)">Delete</button>
             </div>

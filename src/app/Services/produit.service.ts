@@ -42,10 +42,13 @@ export class ProduitService {
   }
   updateProduct(id: number, product: Produit): Observable<Produit> {
     return this.http.put<Produit>(
-      this.baseURL + '/modify-produit/' + id,
+      this.baseURL + '/modify-produit',
       product,
       this.httpOptions
     );
+  }
+  SearchProductByName(name: string): Observable<Produit[]> {
+    return this.http.get<Produit[]>(this.baseURL + '/retrieve-produitByLibelle/' + name);
   }
   getAllRayonsFormDb(): Observable<Rayon[]> {
     return this.http.get<Rayon[]>(
