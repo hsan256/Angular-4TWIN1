@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { DetailProduit } from 'src/app/Models/detail-produit';
+import { DetailProduitService } from 'src/app/Services/detail-produit.service';
 import { Produit } from '../../Models/produit';
 import { ProduitService } from '../../Services/produit.service';
 
@@ -15,10 +17,15 @@ export class ListProduitComponent implements OnInit {
   closeResult: string;
 
   list: Produit[];
+  listDetailProduit: DetailProduit[];
+
   produit: Produit = new Produit();
+  detailproduct: DetailProduit = new DetailProduit();
+
   productToShow: Produit = new Produit();
   constructor(
     private ps: ProduitService,
+    private ds: DetailProduitService,
     private router: Router,
     private modalService: NgbModal
   ) {}
@@ -42,8 +49,15 @@ export class ListProduitComponent implements OnInit {
   Modifier(id: number) {
     this.router.navigate(['/updateproduit', id]);
   }
-
+  getDetailProductByidProduit(id: number) {
+    this.ds.getDetailProductByIdProduit(id).subscribe((res) => {
+      console.log(res);
+      this.detailproduct = res;
+    });
+  }
   open(content, p: Produit) {
+    this.detailproduct = new DetailProduit();
+    this.getDetailProductByidProduit(p.idProduit);
     this.productToShow = p;
     this.modalService
       .open(content, { ariaLabelledBy: 'modal-basic-title' })

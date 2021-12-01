@@ -23,4 +23,7 @@ export class DetailProduitService {
       this.httpOptions
     );
   }
+  getDetailProductByIdProduit(id: number): Observable<DetailProduit> {
+    return this.http.get<DetailProduit>(this.baseURL + '/retrieve-detailproduitByidProduit/' + id);
+  }
 }

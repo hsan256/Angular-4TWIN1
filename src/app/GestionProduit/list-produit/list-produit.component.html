@@ -17,7 +17,7 @@
 
 <ng-template #mymodal let-modal>
     <div class="modal-header">
-        <h4 class="modal-title" id="modal-basic-title">Bootstrap Modal</h4>
+        <h4 class="modal-title" id="modal-basic-title">{{productToShow.libelleProduit}}</h4>
         <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
             <span aria-hidden="true">×</span>
         </button>
@@ -27,8 +27,10 @@
         <div class="card-body">
             <h5 class="card-title">Id :{{productToShow.idProduit}}</h5>
             <p class="card-text">Code : {{productToShow.codeProduit}}</p>
-            <p class="card-text">Nom : {{productToShow.libelleProduit}}</p>
             <p class="card-text">Prix Unitaire : {{productToShow.prixUnitaire}}</p>
+            <p class="card-text">Creation : {{detailproduct.datecreation}}</p>
+            <p class="card-text">Dernier Modification : {{detailproduct.dateDernierModification}}</p>
+            <p class="card-text">categorie Produit : {{detailproduct.categorieProduit}}</p>
             <div>
                 <button class="btn btn-sm btn-warning" (click)="modal.close('Save click')"
                     (click)="Modifier(productToShow.idProduit)">Update</button>
