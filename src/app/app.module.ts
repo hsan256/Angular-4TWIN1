@@ -16,6 +16,8 @@ import { AddRayonComponent } from './GestionRayons/add-rayon/add-rayon.component
 import { UpdateProduitComponent } from './GestionProduit/update-produit/update-produit.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { Ng2OrderModule } from 'ng2-order-pipe';
+import { ListStocksComponent } from './GestionStocks/list-stocks/list-stocks.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +30,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     ListRayonsComponent,
     AddRayonComponent,
     UpdateProduitComponent,
+    ListStocksComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,7 +38,8 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     HttpClientModule,
     FormsModule,
     NgbModule,
-    Ng2SearchPipeModule
+    Ng2SearchPipeModule,
+    Ng2OrderModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

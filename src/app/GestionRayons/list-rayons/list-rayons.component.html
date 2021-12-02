@@ -29,14 +29,14 @@
 	<table class="table align-items-center table-flush">
 		<thead class="thead-light">
 			<tr>
-				<th scope="col" class="sort" data-sort="name">Id</th>
+				<th scope="col" class="sort" data-sort="id" (click)="sort('id')">Id</th>
 				<th scope="col" class="sort" data-sort="budget">Code Rayon</th>
 				<th scope="col" class="sort" data-sort="status">Lieblle Rayon</th>
 				<th scope="col">Actions</th>
 			</tr>
 		</thead>
 		<tbody class="list">
-			<tr *ngFor="let item of rayonsList; index as ind">
+			<tr *ngFor="let item of rayonsList | orderBy: key: reverse; index as ind ">
 				<th scope="row">
 					<div class="media align-items-center">
 						<!--<a href="#" class="avatar rounded-circle mr-3">

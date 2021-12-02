@@ -1,35 +1,34 @@
-import { Component, EventEmitter, OnInit, ViewChild } from '@angular/core';
-import { Rayon } from 'src/app/Models/rayon';
-import { RayonService } from 'src/app/Services/rayon.service';
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { Component, EventEmitter, OnInit } from '@angular/core';
+import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Stock } from 'src/app/Models/stock';
+import { StockService } from 'src/app/Services/stock.service';
 
 @Component({
-  selector: 'app-list-rayons',
-  templateUrl: './list-rayons.component.html',
-  styleUrls: ['./list-rayons.component.css']
+  selector: 'app-list-stocks',
+  templateUrl: './list-stocks.component.html',
+  styleUrls: ['./list-stocks.component.css']
 })
+export class ListStocksComponent implements OnInit {
 
-export class ListRayonsComponent implements OnInit {
-
-  rayonsList: Array<Rayon> = [];
+  stocksList: Array<Stock> = [];
   errorMessage: string = "";
   closeResult: string;
-  idRayon: any;
+  idStock: any;
 
-  rayon: Rayon = new Rayon();
+  stock: Stock = new Stock();
   save = new EventEmitter<any>();
 
-  constructor(private rayonService: RayonService, private modalService: NgbModal) { }
+  constructor(private stockService: StockService, private modalService: NgbModal) { }
 
   ngOnInit(): void {
-    this.rayonService.getAllRayon().subscribe(data => {
-      this.rayonsList = data;
+    this.stockService.getAllStock().subscribe(data => {
+      this.stocksList = data;
     });
   }
 
-  deleteRayon(item: Rayon, id: number) {
-    this.rayonService.deleteRayon(item).subscribe(data => {
-      this.rayonsList.splice(id, 1);
+  deleteStock(item: Stock, id: number) {
+    this.stockService.deleteStock(item).subscribe(data => {
+      this.stocksList.splice(id, 1);
       this.ngOnInit();
     }, err => {
       this.errorMessage = 'Unexpected error occured';
@@ -37,8 +36,8 @@ export class ListRayonsComponent implements OnInit {
     })
   }
 
-  saveRayon() {
-    this.rayonService.addRayon(this.rayon).subscribe(data => {
+  saveStock() {
+    this.stockService.addStock(this.stock).subscribe(data => {
       this.save.emit(data);
       this.ngOnInit();
     }, err => {
@@ -47,8 +46,8 @@ export class ListRayonsComponent implements OnInit {
     })
   }
 
-  editRayon() {
-    this.rayonService.editRayon(this.rayon).subscribe(data => {
+  editStock() {
+    this.stockService.editStock(this.stock).subscribe(data => {
       this.ngOnInit();
     }, err => {
       this.errorMessage = 'Unexpected error occurred.';
@@ -64,8 +63,8 @@ export class ListRayonsComponent implements OnInit {
     });
   }
   
-  openedit(content, item:Rayon) {
-    this.rayon = Object.assign({}, item);
+  openedit(content, item:Stock) {
+    this.stock = Object.assign({}, item);
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
@@ -84,19 +83,13 @@ export class ListRayonsComponent implements OnInit {
   }
 
   Search(){
-    if(this.idRayon == ""){
+    if(this.idStock == ""){
       this.ngOnInit()
     }else{
-      this.rayonsList = this.rayonsList.filter(res =>{
-        return res.idRayon.toLocaleString().match(this.idRayon.toLocaleLowerCase())
+      this.stocksList = this.stocksList.filter(res =>{
+        return res.idStock.toLocaleString().match(this.idStock.toLocaleLowerCase())
       })
     }
   }
 
-  key:string = 'id';
-  reverse: boolean = true;
-  sort(key){
-    this.key = key;
-    this.reverse = !this.reverse;
-  }
 }
