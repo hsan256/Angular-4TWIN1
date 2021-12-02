@@ -7,6 +7,7 @@ import { ProduitService } from 'src/app/Services/produit.service';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DetailProduit } from 'src/app/Models/detail-produit';
 import { DetailProduitService } from 'src/app/Services/detail-produit.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-add-produit',
@@ -15,6 +16,8 @@ import { DetailProduitService } from 'src/app/Services/detail-produit.service';
 })
 export class AddProduitComponent implements OnInit {
   title = 'appBootstrap';
+  myForm: FormGroup;
+  myForm2: FormGroup;
 
   closeResult: string;
   listDetailProduit: DetailProduit[];
@@ -34,6 +37,18 @@ export class AddProduitComponent implements OnInit {
   ngOnInit(): void {
     this.getAllRayons();
     this.getAllStocks();
+    this.myForm = new FormGroup({
+      code:new FormControl(this.product.codeProduit,[Validators.required, Validators.pattern("[a-zA-Z0-9]*")]),
+      libelle:new FormControl(this.product.libelleProduit,[Validators.required , Validators.pattern("[a-zA-Z]*")]),
+      prixUnitaire:new FormControl(this.product.prixUnitaire,[Validators.required, Validators.pattern("[0-9]*")]),
+      rayon:new FormControl(this.product.rayon,[Validators.required]),
+      stock:new FormControl(this.product.stock,[Validators.required])
+    });
+    this.myForm2 = new FormGroup({
+      dateCeation:new FormControl(this.detailproduct.datecreation,[Validators.required]),
+      dateDernierModification:new FormControl(this.detailproduct.dateDernierModification,[Validators.required]),
+      categorieProduit:new FormControl(this.detailproduct.categorieProduit,Validators.required),
+    })
   }
   save() {
     this.ps.addProduct(this.product).subscribe((res) => {
@@ -56,6 +71,8 @@ export class AddProduitComponent implements OnInit {
   }
 
   open(content) {
+    console.log(this.product);
+    this.save();
     this.modalService
       .open(content, { ariaLabelledBy: 'modal-basic-title' })
       .result.then(

@@ -8,18 +8,44 @@
         <form #f="ngForm" (submit)="save()">
             <div class="form-group">
                 <label class="form-control-label" for="exampleFormControlInput1">Code Produit</label>
-                <input name="code" [(ngModel)]="product.codeProduit" #first="ngModel" type="text" class="form-control"
-                    id="exampleFormControlInput1" placeholder="Code Produit">
+                <input name="code" [(ngModel)]="product.codeProduit" #code="ngModel" type="text" class="form-control"
+                    id="exampleFormControlInput1" placeholder="Code Produit" pattern="[a-zA-Z0-9]*" required>
+            </div>
+            <div *ngIf="code.touched && code.errors">
+                <div class="alert alert-danger" role="alert" *ngIf="code.errors.required">
+                    Champ Obligatoire
+                </div>
+                <div class="alert alert-danger" role="alert" *ngIf="code.errors.pattern">
+                    Le champ doit contenir que des lettres et des chiffres
+                </div>
             </div>
             <div class="form-group">
                 <label class="form-control-label" for="exampleFormControlInput1">Libelle Produit</label>
-                <input name="libelle" [(ngModel)]="product.libelleProduit" #first="ngModel" type="text"
-                    class="form-control" id="exampleFormControlInput1" placeholder="Libelle Produit">
+                <input name="libelle" [(ngModel)]="product.libelleProduit" #libelle="ngModel" type="text"
+                    class="form-control" id="exampleFormControlInput1" placeholder="Libelle Produit" pattern="[a-zA-Z]*"
+                    required>
+            </div>
+            <div *ngIf="libelle.touched && libelle.errors">
+                <div class="alert alert-danger" role="alert" *ngIf="libelle.errors.required">
+                    Champ Obligatoire
+                </div>
+                <div class="alert alert-danger" role="alert" *ngIf="libelle.errors.pattern">
+                    Le champ doit contenir que des lettres
+                </div>
             </div>
             <div class="form-group">
                 <label class="form-control-label" for="exampleFormControlInput1">Prix Unitaire Produit</label>
-                <input name="prixUnitaire" [(ngModel)]="product.prixUnitaire" #first="ngModel" type="text"
-                    class="form-control" id="exampleFormControlInput1" placeholder="Libelle Produit">
+                <input name="prixUnitaire" [(ngModel)]="product.prixUnitaire" #prixUnitaire="ngModel" type="text"
+                    class="form-control" id="exampleFormControlInput1" placeholder="Prix Unitaire Produit"
+                    pattern="[0-9]*" required>
+            </div>
+            <div *ngIf="prixUnitaire.touched && prixUnitaire.errors">
+                <div class="alert alert-danger" role="alert" *ngIf="prixUnitaire.errors.required">
+                    Champ Obligatoire
+                </div>
+                <div class="alert alert-danger" role="alert" *ngIf="prixUnitaire.errors.pattern">
+                    Le champ doit contenir que des chiffres
+                </div>
             </div>
             <div class="form-group">
                 <label class="form-control-label" for="exampleFormControlSelect1">Rayon</label>
@@ -35,7 +61,8 @@
                     <option *ngFor="let s of listStock" [ngValue]="s">{{s.libelleStock}}</option>
                 </select>
             </div>
-            <button class="btn btn-primary">Update</button>
+            <button class="btn btn-primary" [disabled]="f.invalid">Update</button>
+            <!-- <button class="btn btn-primary" >List des Produits</button> -->
         </form>
     </div>
 </div>
