@@ -85,6 +85,16 @@ export class ListProduitComponent implements OnInit {
       });
     }
   }
+  triASC(){
+    this.ps.TriProduitASC().subscribe((res)=> {
+      this.list =res;
+    });
+  }
+  triDESC(){
+    this.ps.TriProduitDESC().subscribe((res)=> {
+      this.list =res;
+    });
+  }
   open(content, p: Produit) {
     this.detailproduct = new DetailProduit();
     this.getDetailProductByidProduit(p.idProduit);
