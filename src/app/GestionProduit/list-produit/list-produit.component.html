@@ -1,11 +1,23 @@
-<div class="form-group mb-1">
-    <div class="input-group input-group-alternative input-group-merge">
-        <div class="input-group-prepend">
-            <span class="input-group-text"><i class="fas fa-search"></i></span>
+<form class="navbar-search navbar-search-light form-inline mr-sm-4 test" id="navbar-search-main">
+    <div class="form-group mb-0">
+        <div class="input-group input-group-alternative input-group-merge">
+            <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fas fa-search"></i></span>
+            </div>
+            <input class="form-control" placeholder="Search" type="text" [(ngModel)]="SearchVal" (keyup)="Search()">
+            
         </div>
-        <input class="form-control" placeholder="Search" type="text"[(ngModel)]="SearchVal" (keyup)="Search()">
     </div>
-</div>
+    
+    <button type="button" class="close" data-action="search-close" data-target="#navbar-search-main" aria-label="Close">
+        <span aria-hidden="true">×</span>
+    </button>
+    <div class="col-lg-6 col-5 text-right">
+        <button class="btn btn-sm btn-neutral" (click)='triASC()'>Trie Up</button>
+        <button class="btn btn-sm btn-neutral" (click)='triDESC()'>Trie Down</button>
+      </div>
+</form>
+
 <div class="card" style="width: 18rem;" *ngFor="let p of list">
     <img src="../../assets/produit/IMG_3196.jpg" class="card-img-top" alt="...">
     <div class="card-body">

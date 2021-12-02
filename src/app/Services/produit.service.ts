@@ -50,6 +50,12 @@ export class ProduitService {
   SearchProductByName(name: string): Observable<Produit[]> {
     return this.http.get<Produit[]>(this.baseURL + '/retrieve-produitByLibelle/' + name);
   }
+  TriProduitASC(): Observable<Produit[]>{
+    return this.http.get<Produit[]>(this.baseURL + '/retrieve-produitASC');
+  }
+  TriProduitDESC(): Observable<Produit[]>{
+    return this.http.get<Produit[]>(this.baseURL + '/retrieve-produitDESC');
+  }
   getAllRayonsFormDb(): Observable<Rayon[]> {
     return this.http.get<Rayon[]>(
       'http://localhost:8081/SpringMVC/servlet/rayon/retrieve-all-rayons'
