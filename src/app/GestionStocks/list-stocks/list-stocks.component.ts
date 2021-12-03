@@ -101,7 +101,10 @@ export class ListStocksComponent implements OnInit {
   }
 
   decrementStock(i: number){
-    this.stocksList[i].qteStock--
+    if(this.stocksList[i].qteStock > 0)
+      this.stocksList[i].qteStock--
+    else
+      this.stocksList[i].qteStock=0
   }
 
   statusStock(i: number){
