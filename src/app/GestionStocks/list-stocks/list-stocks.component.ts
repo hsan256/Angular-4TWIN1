@@ -14,6 +14,7 @@ export class ListStocksComponent implements OnInit {
   errorMessage: string = "";
   closeResult: string;
   idStock: any;
+  p:number = 1;
 
   stock: Stock = new Stock();
   save = new EventEmitter<any>();
@@ -89,6 +90,25 @@ export class ListStocksComponent implements OnInit {
       this.stocksList = this.stocksList.filter(res =>{
         return res.idStock.toLocaleString().match(this.idStock.toLocaleLowerCase())
       })
+    }
+  }
+
+  key:string = 'id';
+  reverse: boolean = true;
+  sort(key){
+    this.key = key;
+    this.reverse = !this.reverse;
+  }
+
+  decrementStock(i: number){
+    this.stocksList[i].qteStock--
+  }
+
+  statusStock(i: number){
+    if(this.stocksList[i].qteStock <= this.stocksList[i].qteMin){
+      return "warning";
+    }else{
+      return "success";
     }
   }
 

@@ -15,6 +15,7 @@ export class ListRayonsComponent implements OnInit {
   errorMessage: string = "";
   closeResult: string;
   idRayon: any;
+  p:number = 1;
 
   rayon: Rayon = new Rayon();
   save = new EventEmitter<any>();

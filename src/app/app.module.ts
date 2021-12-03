@@ -14,9 +14,10 @@ import { FormsModule } from '@angular/forms';
 import { ListRayonsComponent } from './GestionRayons/list-rayons/list-rayons.component';
 import { AddRayonComponent } from './GestionRayons/add-rayon/add-rayon.component';
 import { UpdateProduitComponent } from './GestionProduit/update-produit/update-produit.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbPaginationNext } from '@ng-bootstrap/ng-bootstrap';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { Ng2OrderModule } from 'ng2-order-pipe';
+import { NgxPaginationModule } from 'ngx-pagination';
 import { ListStocksComponent } from './GestionStocks/list-stocks/list-stocks.component';
 
 @NgModule({
@@ -40,6 +41,7 @@ import { ListStocksComponent } from './GestionStocks/list-stocks/list-stocks.com
     NgbModule,
     Ng2SearchPipeModule,
     Ng2OrderModule,
+    NgxPaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent]
