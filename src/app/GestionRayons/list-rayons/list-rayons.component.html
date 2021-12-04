@@ -11,7 +11,7 @@
 								<i class="fas fa-search"></i>
 							</span>
 						</div>
-						<input class="form-control" placeholder="Search" type="text" name="idRayon" [(ngModel)]="idRayon" (ngModelChange)="Search()">
+						<input class="form-control" placeholder="Search" type="text" name="idRayon" [(ngModel)]="searchObject" (ngModelChange)="Search()">
 					</div>
 				</div>
 			</form>
@@ -30,8 +30,8 @@
 		<thead class="thead-light">
 			<tr>
 				<th scope="col" class="sort" data-sort="id" (click)="sort('idRayon')">Id</th>
-				<th scope="col" class="sort" data-sort="budget" (click)="sort('codeRayon')">Code Rayon</th>
 				<th scope="col" class="sort" data-sort="status" (click)="sort('libelleRayon')">Lieblle Rayon</th>
+				<th scope="col" class="sort" data-sort="budget" (click)="sort('codeRayon')">Code Rayon</th>
 				<th scope="col">Actions</th>
 			</tr>
 		</thead>
@@ -48,10 +48,10 @@
 					</div>
 				</th>
 				<td class="budget">
-					{{item.codeRayon}}
+					{{item.libelleRayon}}
 				</td>
 				<td class="budget">
-					{{item.libelleRayon}}
+					{{item.codeRayon}}
 				</td>
 				<td class="">
 					<a (click)="openedit(edit, item)" class="table-action">
@@ -65,8 +65,6 @@
 		</tbody>
 	</table>
 </div>
-
-
 
 <!-- Card footer -->
 <div class="card-footer py-4">
@@ -91,6 +89,14 @@
 
 		<form class="new-event--form" #f="ngForm" (ngSubmit)="f.form.valid && saveRayon()">
 			<div class="form-group">
+				<label for="libelle">
+					Libelle Rayon</label>
+				<input type="text" id="libelle" placeholder="Libelle Rayon" name="libelle" class="form-control form-control-alternative" [(ngModel)]="rayon.libelleRayon" #libelle="ngModel" required/>
+				<div class="alert alert-danger mt-3" *ngIf="libelle.invalid && libelle.touched">
+					<small *ngIf="libelle.errors.required">Libelle Rayon is a required field</small>
+				</div>
+			</div>
+			<div class="form-group">
 				<label for="code">
 					Code Rayon</label>
 				<input type="text" id="code" placeholder="Code Rayon" name="code" class="form-control form-control-alternative" [(ngModel)]="rayon.codeRayon" #code="ngModel" required/>
@@ -99,14 +105,6 @@
 				</div>
 			</div>
 
-			<div class="form-group">
-				<label for="libelle">
-					Libelle Rayon</label>
-				<input type="text" id="libelle" placeholder="Libelle Rayon" name="libelle" class="form-control form-control-alternative" [(ngModel)]="rayon.libelleRayon" #libelle="ngModel" required/>
-				<div class="alert alert-danger mt-3" *ngIf="libelle.invalid && libelle.touched">
-					<small *ngIf="libelle.errors.required">Libelle Rayon is a required field</small>
-				</div>
-			</div>
 
 			<input type="hidden" class="new-event--start"/>
 			<input type="hidden" class="new-event--end"/>
@@ -132,14 +130,6 @@
 		</div>
 
 		<form class="new-event--form" #f="ngForm" (ngSubmit)="f.form.valid && saveRayon()">
-			<div class="form-group">
-				<label for="code">
-					Code Rayon</label>
-				<input type="text" id="code" placeholder="Code Rayon" name="code" class="form-control form-control-alternative" [(ngModel)]="rayon.codeRayon" #code="ngModel" required/>
-				<div class="alert alert-danger mt-3" *ngIf="code.invalid && code.touched">
-					<small *ngIf="code.errors.required">Code Rayon is a required field</small>
-				</div>
-			</div>
 
 			<div class="form-group">
 				<label for="libelle">
@@ -147,6 +137,14 @@
 				<input type="text" id="libelle" placeholder="Libelle Rayon" name="libelle" class="form-control form-control-alternative" [(ngModel)]="rayon.libelleRayon" #libelle="ngModel" required/>
 				<div class="alert alert-danger mt-3" *ngIf="libelle.invalid && libelle.touched">
 					<small *ngIf="libelle.errors.required">Libelle Rayon is a required field</small>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="code">
+					Code Rayon</label>
+				<input type="text" id="code" placeholder="Code Rayon" name="code" class="form-control form-control-alternative" [(ngModel)]="rayon.codeRayon" #code="ngModel" required/>
+				<div class="alert alert-danger mt-3" *ngIf="code.invalid && code.touched">
+					<small *ngIf="code.errors.required">Code Rayon is a required field</small>
 				</div>
 			</div>
 
@@ -158,4 +156,3 @@
 		</form>
 	</div>
 </ng-template>
-

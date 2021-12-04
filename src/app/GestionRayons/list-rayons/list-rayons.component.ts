@@ -14,7 +14,7 @@ export class ListRayonsComponent implements OnInit {
   rayonsList: Array<Rayon> = [];
   errorMessage: string = "";
   closeResult: string;
-  idRayon: any;
+  searchObject: any;
   p:number = 1;
 
   rayon: Rayon = new Rayon();
@@ -85,11 +85,11 @@ export class ListRayonsComponent implements OnInit {
   }
 
   Search(){
-    if(this.idRayon == ""){
+    if(this.searchObject == ""){
       this.ngOnInit()
     }else{
       this.rayonsList = this.rayonsList.filter(res =>{
-        return res.idRayon.toLocaleString().match(this.idRayon.toLocaleLowerCase())
+        return res.libelleRayon.toLocaleLowerCase().match(this.searchObject.toLocaleLowerCase())
       })
     }
   }

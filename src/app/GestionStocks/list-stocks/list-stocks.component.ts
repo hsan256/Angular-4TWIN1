@@ -13,7 +13,7 @@ export class ListStocksComponent implements OnInit {
   stocksList: Array<Stock> = [];
   errorMessage: string = "";
   closeResult: string;
-  idStock: any;
+  searchObject: any;
   p:number = 1;
 
   stock: Stock = new Stock();
@@ -84,11 +84,11 @@ export class ListStocksComponent implements OnInit {
   }
 
   Search(){
-    if(this.idStock == ""){
+    if(this.searchObject == ""){
       this.ngOnInit()
     }else{
       this.stocksList = this.stocksList.filter(res =>{
-        return res.idStock.toLocaleString().match(this.idStock.toLocaleLowerCase())
+        return res.libelleStock.toLocaleLowerCase().match(this.searchObject.toLocaleLowerCase())
       })
     }
   }

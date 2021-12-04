@@ -19,6 +19,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { Ng2OrderModule } from 'ng2-order-pipe';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ListStocksComponent } from './GestionStocks/list-stocks/list-stocks.component';
+import { StatisticsComponent } from './GestionStocks/statistics/statistics.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { ListStocksComponent } from './GestionStocks/list-stocks/list-stocks.com
     AddRayonComponent,
     UpdateProduitComponent,
     ListStocksComponent,
+    StatisticsComponent,
   ],
   imports: [
     BrowserModule,
@@ -41,7 +43,7 @@ import { ListStocksComponent } from './GestionStocks/list-stocks/list-stocks.com
     NgbModule,
     Ng2SearchPipeModule,
     Ng2OrderModule,
-    NgxPaginationModule
+    NgxPaginationModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
