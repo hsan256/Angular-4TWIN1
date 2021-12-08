@@ -15,6 +15,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UpdateProduitComponent } from './GestionProduit/update-produit/update-produit.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { UpdateDetailProduitComponent } from './GestionProduit/update-detail-produit/update-detail-produit.component';
+import { SimpleNotificationsModule } from 'angular2-notifications';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 @NgModule({
   declarations: [
@@ -34,7 +37,10 @@ import { UpdateDetailProduitComponent } from './GestionProduit/update-detail-pro
     HttpClientModule,
     FormsModule,
     NgbModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SimpleNotificationsModule.forRoot(),
+    BrowserAnimationsModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]
