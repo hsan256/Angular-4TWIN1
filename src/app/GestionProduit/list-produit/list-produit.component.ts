@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NotificationsService } from 'angular2-notifications';
 import { DetailProduit } from 'src/app/Models/detail-produit';
 import { DetailProduitService } from 'src/app/Services/detail-produit.service';
 import { Produit } from '../../Models/produit';
@@ -28,7 +29,8 @@ export class ListProduitComponent implements OnInit {
     private ps: ProduitService,
     private ds: DetailProduitService,
     private router: Router,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private services: NotificationsService
   ) {}
 
   ngOnInit(): void {
@@ -70,7 +72,11 @@ export class ListProduitComponent implements OnInit {
   ModifierDetailProduit(id: number) {
     this.router.navigate(['/updatedetailproduit', id]);
   }
+
+  
   deleteDetailProduct(i: number) {
+    this.onSucces('Product Deleted successfully');
+
     this.ds.deleteDetailProduct(i).subscribe((res) => {
       console.log(res);
     });
@@ -120,4 +126,23 @@ export class ListProduitComponent implements OnInit {
       return `with: ${reason}`;
     }
   }
+  onSucces(message) {
+    this.services.success('success', message, {
+      position: ['bottom', 'right'],
+      timeOut: 2000,
+      Animation: 'fade',
+      showProgressBar: true,
+    });
+    
+
+  }
+  onError(message) {
+    this.services.error('Error', message, {
+      position: ['bottom', 'right'],
+      timeOut: 2000,
+      Animation: 'fade',
+      showProgressBar: true,
+    });
+  }
+  
 }

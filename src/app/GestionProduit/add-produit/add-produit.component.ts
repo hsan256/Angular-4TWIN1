@@ -7,6 +7,8 @@ import { ProduitService } from 'src/app/Services/produit.service';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DetailProduit } from 'src/app/Models/detail-produit';
 import { DetailProduitService } from 'src/app/Services/detail-produit.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { NotificationsService } from 'angular2-notifications';
 
 @Component({
   selector: 'app-add-produit',
@@ -15,6 +17,8 @@ import { DetailProduitService } from 'src/app/Services/detail-produit.service';
 })
 export class AddProduitComponent implements OnInit {
   title = 'appBootstrap';
+  myForm: FormGroup;
+  myForm2: FormGroup;
 
   closeResult: string;
   listDetailProduit: DetailProduit[];
@@ -28,17 +32,48 @@ export class AddProduitComponent implements OnInit {
     private ps: ProduitService,
     private ds: DetailProduitService,
     private router: Router,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private services: NotificationsService
   ) {}
 
   ngOnInit(): void {
     this.getAllRayons();
     this.getAllStocks();
+    this.myForm = new FormGroup({
+      code: new FormControl(this.product.codeProduit, [
+        Validators.required,
+        Validators.pattern('[a-zA-Z0-9]*'),
+      ]),
+      libelle: new FormControl(this.product.libelleProduit, [
+        Validators.required,
+        Validators.pattern('[a-zA-Z]*'),
+      ]),
+      prixUnitaire: new FormControl(this.product.prixUnitaire, [
+        Validators.required,
+        Validators.pattern('[0-9]*'),
+      ]),
+      rayon: new FormControl(this.product.rayon, [Validators.required]),
+      stock: new FormControl(this.product.stock, [Validators.required]),
+    });
+    this.myForm2 = new FormGroup({
+      dateCeation: new FormControl(this.detailproduct.datecreation, [
+        Validators.required,
+      ]),
+      dateDernierModification: new FormControl(
+        this.detailproduct.dateDernierModification,
+        [Validators.required]
+      ),
+      categorieProduit: new FormControl(
+        this.detailproduct.categorieProduit,
+        Validators.required
+      ),
+    });
   }
   save() {
     this.ps.addProduct(this.product).subscribe((res) => {
       console.log('Product created!');
       this.product = res;
+      this.onSucces('Product Created successfully');
     });
   }
 
@@ -56,6 +91,8 @@ export class AddProduitComponent implements OnInit {
   }
 
   open(content) {
+    console.log(this.product);
+    this.save();
     this.modalService
       .open(content, { ariaLabelledBy: 'modal-basic-title' })
       .result.then(
@@ -83,8 +120,27 @@ export class AddProduitComponent implements OnInit {
     console.log(this.detailproduct);
     this.ds.addDetailProduct(this.detailproduct).subscribe((res) => {
       console.log('Product created!');
+      //this.onSucces('DetailProduct Created successfully');
       this.detailproduct = res;
       this.router.navigate(['/listproduit']);
+    });
+  }
+  onSucces(message) {
+    this.services.success('success', message, {
+      position: ['bottom', 'right'],
+      timeOut: 2000,
+      Animation: 'fade',
+      showProgressBar: true,
+    });
+    
+
+  }
+  onError(message) {
+    this.services.error('Error', message, {
+      position: ['bottom', 'right'],
+      timeOut: 2000,
+      Animation: 'fade',
+      showProgressBar: true,
     });
   }
 }
