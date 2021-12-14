@@ -100,4 +100,20 @@ export class ListRayonsComponent implements OnInit {
     this.key = key;
     this.reverse = !this.reverse;
   }
+
+  printReportexcel(): void{
+    let dataType = 'application/vnd.ms-excel.sheet.macroEnabled.12';
+    let tableSelect = document.getElementById('rayons');
+    let tableHtml = tableSelect.outerHTML.replace(/ /g, '%20');
+    let downloadLink = document.createElement('a');
+    document.body.appendChild(downloadLink);
+    downloadLink.href = 'data:' + dataType + ', ' + tableHtml;
+    downloadLink.download = 'rayons-report.xls';
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
+  }
+
+  printReportPdf(){
+    window.print();
+  }
 }

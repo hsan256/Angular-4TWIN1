@@ -16,17 +16,28 @@
 				</div>
 			</form>
 		</div>
-		<div class="col-md-6">
+		<div class="col-md-1">
+			<div class="text-right p-3">
+				<button class="btn btn-warning" (click)="printReportexcel()">Excel</button>
+			</div>
+		</div>
+		<div class="col-md-1">
+			<div class="text-right p-3">
+				<button class="btn btn-warning" (click)="printReportPdf()">PDF</button>
+			</div>
+		</div>
+		<div class="col-md-4">
 			<div class="text-right p-3">
 				<button class="btn btn-success" (click)="open(mymodal)">Crée un Rayon</button>
 			</div>
 		</div>
+		
 	</div>
 </div>
 <!-- Navbar links -->
 
 <div class="table-responsive">
-	<table class="table align-items-center table-flush">
+	<table class="table align-items-center table-flush" id="rayons">
 		<thead class="thead-light">
 			<tr>
 				<th scope="col" class="sort" data-sort="id" (click)="sort('idRayon')">Id</th>
@@ -41,7 +52,7 @@
 					<div class="media align-items-center">
 						<a href="#" class="avatar rounded-circle mr-3">
 							<img alt="Image placeholder" src="../../assets/img/logocart.png">
-						</a> 
+						</a>
 						<div class="media-body">
 							<span class="name mb-0 text-sm">{{item.idRayon}}</span>
 						</div>
