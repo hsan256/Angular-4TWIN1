@@ -1,0 +1,83 @@
+<div class="card-header border-0">
+    <div class="row">
+      <div class="col-6">
+        <h3 class="mb-0">LISTE DES CLIENTS</h3>
+      </div>
+      <div class="col-6 text-right">
+        <a [routerLink]="['/addclient']" class="btn btn-sm btn-neutral btn-round btn-icon" data-toggle="tooltip" data-original-title="Edit product">
+          <span class="btn-inner--icon"><i class="fas fa-user-edit"></i></span>
+          <span class="btn-inner--text">Ajouter un client</span>
+        </a>
+      </div>
+    </div>
+  </div>
+  <!-------------------------------------------------------------------------------------------------->
+  <nav class="navbar">
+    <div class="input-group input-group-alternative input-group-merge">
+      <div class="input-group-prepend">
+    <span class="input-group-text"><i class="fas fa-search"></i></span>
+      </div>
+    <input class="form-control" type="text" name="firstName" [(ngModel)]="search" (ngModelChange)="Search() " 
+    placeholder="Enter First Name to search">
+    </div>
+  </nav>
+  <!--------------------------------------------------------------------------------------------------->
+  <!-- Light table -->
+  <div class="table-responsive" id="htmlData" >
+    <table class="table align-items-center table-flush">
+      <thead class="thead-light" >
+        <tr>
+          <th (click)="sort('prenom')">Client&nbsp;<i class="fa fa-sort"></i></th>
+          <th (click)="sort('idClient')">ID&nbsp;<i class="fa fa-sort"></i></th>
+          <th (click)="sort('dateNaissance')">Date de naissance&nbsp;<i class="fa fa-sort"></i></th>
+          <th (click)="sort('telephone')">Téléphone&nbsp;<i class="fa fa-sort"></i></th>
+          <th (click)="sort('email')">Adresse Mail&nbsp;<i class="fa fa-sort"></i></th>
+          <th (click)="sort('categorieClient')">Catégorie&nbsp;<i class="fa fa-sort"></i></th>
+          <th (click)="sort('profession')">Profession&nbsp;<i class="fa fa-sort"></i></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr for *ngFor="let c of list | orderBy : key : reverse | paginate : {itemsPerPage:5,currentPage:p};">
+          <td class="table-user">
+            <img [src]=c.picture class="avatar rounded-circle mr-3">
+            <b>{{c.prenom}} {{c.nom}}</b>
+          </td>
+          <td>
+            <span class="text-muted">{{c.idClient}}</span>
+          </td>
+          <td >
+            <span >{{c.dateNaissance}}</span>
+          </td>
+          <td >
+            <span >{{c.telephone}}</span>
+          </td>
+          <td>
+            <span >{{c.email}}</span>
+          </td>
+          <td>
+            <span >{{c.categorieClient}}</span>
+          </td>
+          <td>
+            <span >{{c.profession}}</span>
+          </td>
+          <td class="table-actions" >
+            <a  class="table-action" [routerLink]="['/client/updateclient',c.idClient]" data-toggle="tooltip" data-original-title="Edit product">
+              <i class="fas fa-user-edit"></i>
+            </a>
+            <a href= "http://localhost:4200/client/listclient" class="table-action table-action-delete" (click)="deleteClient(c)" data-toggle="tooltip" data-original-title="Delete product">
+              <i class="fas fa-trash"></i>
+            </a>
+            </td>
+           
+      </tbody>
+
+      <br>
+      <pagination-controls (pageChange)= "p=$event"></pagination-controls>
+      <div class="text-right">
+      
+      <button class="btn btn-success btn-block" (click)="openPDF()">Download PDF</button>
+      </div>
+    </table>
+  </div>
+  

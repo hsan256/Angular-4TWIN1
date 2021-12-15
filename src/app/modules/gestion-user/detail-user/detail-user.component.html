@@ -1,0 +1,45 @@
+<table>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    <div class="container">
+<div class="row">
+	<div class="col-lg-12">
+		<div class="main-box clearfix">
+			<div class="table-responsive">
+				<table class="table user-list">
+					<thead>
+						<tr >
+							<th><span>ID</span></th>
+							<th><span>Nom & PRENOM</span></th>
+							<th><span>Phone</span></th>
+							<th><span>USERNAME</span></th>
+							<th>&nbsp;</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr for *ngFor="let u of list" >
+							<td>
+								 {{u.id}}
+							</td>
+							<td >
+								{{u.nom}} {{u.prenom}}
+							</td>
+                            <td >
+								{{u.phone}}
+							</td>
+							<td>
+								{{u.username}}
+							</td>
+							<td style="width:20px">
+								<button [disabled]="u.adminuser=='Admin'" (click)="showEdit(u)">Update</button>   .
+                                <button [disabled]="u.adminuser=='Admin'">Delete</button>
+							</td>
+						</tr>
+                        </tbody>
+                        </table>
+                        </div>
+        </div>
+    </div>
+</div>
+</div>
+</table>
+<app-update-user (edited)="updateUser($event)" [userToEdit]="myUser" *ngIf="show"></app-update-user>

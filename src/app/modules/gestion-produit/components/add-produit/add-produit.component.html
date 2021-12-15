@@ -1,0 +1,100 @@
+<div class="card">
+    <!-- Card header -->
+    <div class="card-header">
+        <h3 class="mb-0">Add Product</h3>
+    </div>
+    <!-- Card body -->
+    <div class="card-body">
+        <form [formGroup]="myForm" (submit)="open(mymodal)">
+            <div class="form-group">
+                <label class="form-control-label" for="exampleFormControlInput1">Code Produit</label>
+                <input formControlName="code" type="text" [(ngModel)]="product.codeProduit" class="form-control"
+                    id="exampleFormControlInput1" placeholder="Code Produit">
+            </div>
+            <div class="alert alert-danger" role="alert"
+                *ngIf="myForm.get('code').errors && myForm.get('code').touched">
+                <div *ngIf="myForm.get('code').errors.required">Champ obligatoire</div>
+                <div *ngIf="myForm.get('code').errors.pattern">pattern non respecté</div>
+            </div>
+            <div class="form-group">
+                <label class="form-control-label" for="exampleFormControlInput1">Libelle Produit</label>
+                <input formControlName="libelle" [(ngModel)]="product.libelleProduit" type="text" class="form-control"
+                    id="exampleFormControlInput1" placeholder="Libelle Produit">
+            </div>
+            <div class="alert alert-danger" role="alert"
+                *ngIf="myForm.get('libelle').errors && myForm.get('libelle').touched">
+                <div *ngIf="myForm.get('libelle').errors.required">Champ obligatoire</div>
+                <div *ngIf="myForm.get('libelle').errors.pattern">pattern non respecté</div>
+            </div>
+            <div class="form-group">
+                <label class="form-control-label" for="exampleFormControlInput1">Prix Unitaire Produit</label>
+                <input formControlName="prixUnitaire" [(ngModel)]="product.prixUnitaire" type="text"
+                    class="form-control" id="exampleFormControlInput1" placeholder="Prix Unitaire Produit">
+            </div>
+            <div class="alert alert-danger" role="alert"
+                *ngIf="myForm.get('prixUnitaire').errors && myForm.get('prixUnitaire').touched">
+                <div *ngIf="myForm.get('prixUnitaire').errors.required">Champ obligatoire</div>
+                <div *ngIf="myForm.get('prixUnitaire').errors.pattern">pattern non respecté</div>
+            </div>
+            <div class="form-group">
+                <label class="form-control-label" for="exampleFormControlSelect1">Rayon</label>
+                <select class="form-control" [(ngModel)]="product.rayon" formControlName="rayon" class="form-control"
+                    id="exampleFormControlSelect1">
+                    <option *ngFor="let r of listRayon" [ngValue]="r">{{r.libelleRayon}}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-control-label" for="exampleFormControlSelect1">Stock</label>
+                <select class="form-control" [(ngModel)]="product.stock" formControlName="stock" class="form-control"
+                    id="exampleFormControlSelect1">
+                    <option *ngFor="let s of listStock" [ngValue]="s">{{s.libelleStock}}</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary" [disabled]="myForm.invalid">Ajouter votre produit</button>
+        </form>
+    </div>
+</div>
+<simple-notifications></simple-notifications>
+<ng-template #mymodal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Add Detail Produit</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">×</span>
+        </button>
+    </div>
+    <div class="card">
+        <!-- Card header -->
+        <div class="card-header">
+            <h3 class="mb-0">Add Detail Produit</h3>
+        </div>
+        <!-- Card body -->
+        <div class="card-body">
+            <form [formGroup]="myForm2" (submit)="saveDetailProduit()">
+                <div class="form-group">
+                    <label class="form-control-label" for="exampleFormControlInput1">Date de Creation</label>
+                    <input [(ngModel)]="detailproduct.datecreation" class="form-control" type="date"
+                        id="example-date-input" formControlName="dateCeation">
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="exampleFormControlInput1">date de Derniere
+                        Modification</label>
+                    <input formControlName="dateDernierModification" [(ngModel)]="detailproduct.dateDernierModification"
+                        class="form-control" type="date" id="example-date-input">
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="exampleFormControlInput1">Categorie Produit</label>
+                    <select formControlName="categorieProduit" class="form-control" id="exampleFormControlSelect1"
+                        [(ngModel)]="detailproduct.categorieProduit">
+                        <option selected>ELECTROMENAGER</option>
+                        <option>ALIMENTAIRE</option>
+                        <option>QUINCAILLERIE</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary" (click)="modal.close('Save click')"
+                    [disabled]="myForm2.invalid">Ajouter detail de
+                    votre
+                    produit</button>
+            </form>
+        </div>
+    </div>
+</ng-template>

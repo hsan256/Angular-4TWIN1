@@ -1,0 +1,48 @@
+<div class="card">
+    <!-- Card header -->
+    <div class="card-header">
+        <h3 class="mb-0">Ajouter Fournisseur</h3>
+    </div>
+    <!-- Card body -->
+    <div class="card-body">
+        <form #f="ngForm" (submit)="saveFournisseur()">
+          <div class="form-group">
+            <label class="form-control-label" for="exampleFormControlInput1">Fournisseur libelle</label>
+            <input name="libelle" [(ngModel)]="fournisseur.libelleFornisseur" #first="ngModel" type="text"
+                class="form-control" id="exampleFormControlInput1" placeholder="Libelle Fournisseur">
+        </div>
+        <div class="form-group">
+          <label class="form-control-label" for="exampleFormControlInput1">code Fournisseur</label>
+          <input name="code" [(ngModel)]="fournisseur.codeFornisseur" #codeFornisseur="ngModel" type="text"
+              class="form-control" id="exampleFormControlInput1" placeholder="Code Fournisseur">
+      </div>
+  
+      <div class="form-group">
+        <label class="form-control-label" for="exampleFormControlInput1">Nom</label>
+        <input name="nom" [(ngModel)]="fournisseur.detailfournisseur.nom" #nom="ngModel" type="text"
+            class="form-control" id="exampleFormControlInput1" placeholder="nom">
+    </div>
+      
+    <div class="form-group">
+      <label class="form-control-label" for="exampleFormControlInput1">Prenom </label>
+      <input name="prenom" [(ngModel)]="fournisseur.detailfournisseur.prenom" #first="ngModel" type="text"
+          class="form-control" id="exampleFormControlInput1" placeholder="prenom">
+  </div>
+          
+  <div class="form-group">
+    <label class="form-control-label" for="exampleFormControlInput1">Email</label>
+    <input name="email" [(ngModel)]="fournisseur.detailfournisseur.email" #email="ngModel" type="text"
+        class="form-control" id="exampleFormControlInput1" placeholder="email">
+  </div>
+  
+  <div class="form-group">
+    <label class="form-control-label" >numeroTelephone</label>
+    <input name="numeroTelephone" [(ngModel)]="fournisseur.detailfournisseur.numeroTelephone" #numeroTelephone="ngModel" type="text"
+        class="form-control"  placeholder="numeroTelephone">
+  </div>
+      
+            <button type="submit" class="btn btn-success">Submit</button>  
+        </form>  
+    </div>  
+    </div>  
+   

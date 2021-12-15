@@ -1,0 +1,61 @@
+<section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header">
+              <h1 class="card-title">Detail Fournisseur </h1><br>
+              <button type="button" class="btn btn-block btn-outline-success btn-flat"  (click)="updateDetailFournisseur(f.idDetailFournisseur)" >Modifier</button> 
+              <button type="button" class="btn btn-block btn-outline-danger btn-flat" (click)="deleteDetailFournisseur(f.idDetailFournisseur,u)">Supprimer</button>
+              
+             
+            </div>
+            
+            <!-- /.card-header -->
+            <div class="card-body">
+              <table  class="table table-bordered">
+                <thead align="center" >
+                  <tr>
+                    
+                    <th>Nom</th>
+                    <th>Prenom</th>
+                    <th>Email</th>
+                    <th>Numero Telephone</th>
+  
+                  </tr>
+                </thead>
+                <tbody align="center">
+                 <tr *ngFor="let f of listdp ; let u=index">
+                     
+                     <td>{{f.nom}}</td>
+                     <td>{{f.prenom}}</td>
+                     <td>{{f.email}}</td>
+                     <td>{{f.numeroTelephone}}</td>
+                     
+                      
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+           
+            </div>
+            <!-- /.card-body -->
+            <div class="card-footer clearfix">
+              <ul class="pagination pagination-sm m-0 float-right">
+                <li class="page-item"><a class="page-link" href="#">«</a></li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="#">»</a></li>
+              </ul>
+            </div>
+          </div>
+          <!-- /.card -->
+        </div>
+      </div>
+  
+      <!-- /.row -->
+    <!-- /.container-fluid -->
+    </section>
+  
+  

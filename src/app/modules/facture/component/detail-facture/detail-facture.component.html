@@ -1,0 +1,47 @@
+<form [formGroup]="myForm" (submit)="edit()">
+    <table class="table table-borderless">
+        <thead class="thead-light">
+            <tr class="add">
+                <th scope="col">Product</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Discount %</th>
+                <th scope="col">Discount Amount</th>
+                <th scope="col" class="text-center">Total Amount</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="content">
+                <td>
+                    <select name="product" class="form-control" [(ngModel)]="detailFacture.produit"
+                        (change)="calculerDetailFactureElements()" formControlName="product">
+                        <option *ngFor="let p of produits" [ngValue]="p">{{p.libelleProduit}}</option>
+                    </select>
+                </td>
+                <td>
+                    <input class="form-control" type="number" (change)="calculerDetailFactureElements()"
+                        formControlName="quantity">
+                </td>
+                <td>
+                    <input class="form-control" type="number" (change)="calculerDetailFactureElements()"
+                        formControlName="discount">
+                </td>
+                <td class="text-center">{{detailFacture.montantRemise}}</td>
+                <td class="text-center">{{detailFacture.prixTotal}}</td>
+                <td *ngIf="!detailFacture.idDetailFacture">
+                    <button class="btn btn-sm btn-success" type="submit" [disabled]="myForm.invalid"><i
+                            class="fa fa-check" aria-hidden="true"> add</i></button>
+                </td>
+                <td *ngIf="detailFacture.idDetailFacture">
+                    <button class="btn btn-sm btn-success" type="submit" [disabled]="myForm.invalid"><i
+                            class="fa fa-check" aria-hidden="true"> Update</i></button>
+                </td>
+                <td>
+                    <button class="btn btn-sm btn-danger" (click)="cancelDetailFacture()"><i class="fa fa-times"
+                            aria-hidden="true"> cancel</i></button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</form>

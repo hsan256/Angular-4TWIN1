@@ -1,0 +1,69 @@
+<!--<div class="table-responsive" >
+    <table class="table align-items-center table-flush">
+      <thead class="thead-light" >
+        <tr>
+          <th>ID</th>
+          <th>username</th>
+          <th>paswword</th>
+          <th>role</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr for *ngFor="let u of list">
+          <td >
+            <span >{{u.idUser}}</span>
+          </td>
+          <td >
+            <span >{{u.username}}</span>
+          </td>
+          <td>
+            <span >{{u.password}}</span>
+          </td>
+          <td>
+            <span >{{u.role}}</span>
+          </td>
+          <td class="table-actions" >
+            <a *ngIf="authService.isAdmin()" class="btn btn-danger">Modifier
+            </a>
+            <a *ngIf="authService.isAdmin()" class="btn btn-danger">Supprimer
+            </a>
+            </td>
+          
+      </tbody>
+    </table>
+  </div>
+-->
+<div class="row row-cols-1 row-cols-md-3 g-4">
+  <div class="col">
+    <div class="card h-10" style="width: 18rem;">
+      <img src="../../assets/img/theme/av.png" class="card-img-top" alt="av">
+      <div class="card-body text-center">
+        <h1 class="card-title ">Admin Account</h1>
+        <button type="button" class="btn btn-outline-warning" 
+        [routerLink]="['detailuser/Admin']">Show all</button>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card h-10 " style="width: 18rem;">
+      <img src="../../assets/img/theme/man.png"  class="card-img-top" alt="man">
+      <div class="card-body text-center">
+        <h1 class="card-title">Employeurs</h1>
+        <button type="button" class="btn btn-outline-info"
+        [routerLink]="['detailuser/Employeurs']" >Show all</button>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card h-10" style="width: 18rem;">
+      <img src="../../assets/img/theme/vv.png" class="card-img-top" alt="vv">
+      <div class="card-body text-center">
+        <h1 class="card-title">Employeuses</h1>
+        <button type="button" class="btn btn-outline-dark" 
+        [routerLink]="['detailuser/Employeuses']">Show all</button>
+      </div>
+    </div>
+  </div>
+</div>
+<router-outlet></router-outlet>

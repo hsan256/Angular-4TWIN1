@@ -1,0 +1,25 @@
+<div class="card-body ">
+    <form #f="ngForm" (submit)="updateDetailProduit()">
+        <div class="form-group">
+            <label class="form-control-label" for="exampleFormControlInput1">Date de Creation</label>
+            <input name="dateCeation" [(ngModel)]="detailProduit.datecreation" #first="ngModel" class="form-control"
+                type="date" id="example-date-input">
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="exampleFormControlInput1">date de Derniere
+                Modification</label>
+            <input name="dateDerniereModification" [(ngModel)]="detailProduit.dateDernierModification" #first="ngModel"
+                class="form-control" type="date" id="example-date-input">
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="exampleFormControlInput1">Categorie Produit</label>
+            <select class="form-control" id="exampleFormControlSelect1" name="categorieProduit"
+                [(ngModel)]="detailProduit.categorieProduit">
+                <option selected>ELECTROMENAGER</option>
+                <option>ALIMENTAIRE</option>
+                <option>QUINCAILLERIE</option>
+            </select>
+        </div>
+        <button class="btn btn-primary">Update</button>
+    </form>
+</div>

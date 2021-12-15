@@ -1,0 +1,55 @@
+
+<div class="col-lg-10">
+    <button class="btn btn-sm btn-neutral" (click)='triASC()'>Trie Up</button>
+    <button class="btn btn-sm btn-neutral" (click)='triDESC()'>Trie Down</button>
+    <input class="form-control" placeholder="Search" type="text" [(ngModel)]="SearchVal" (keyup)="Search()">
+
+  </div>
+
+<div class="card" style="width: 18rem;" *ngFor="let p of list">
+    <img src="../../assets/produit/IMG_3196.jpg" class="card-img-top" alt="...">
+    <div class="card-body">
+        <h5 class="card-title">Id :{{p.idProduit}}</h5>
+        <p class="card-text">Code : {{p.codeProduit}}</p>
+        <p class="card-text">Nom : {{p.libelleProduit}}</p>
+        <p class="card-text">Prix Unitaire : {{p.prixUnitaire}}</p>
+        <div>
+            <!--   <a href="#" class="btn btn-sm btn-primary" (click)="ViewProduit(p.idProduit)">View Details</a>-->
+            <button class="btn btn-sm btn-primary" (click)="open(mymodal,p)">View Details</button>
+            <button class="btn btn-sm btn-warning" (click)="Modifier(p.idProduit)">Update</button>
+            <simple-notifications></simple-notifications>
+
+            <button class="btn btn-sm btn-danger" (click)="deleteProduct(p.idProduit)">Delete</button>
+        </div>
+    </div>
+</div>
+
+
+<ng-template #mymodal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">{{productToShow.libelleProduit}}</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">×</span>
+        </button>
+    </div>
+    <div class="card" style="width: 18rem;">
+        <img src="../../assets/produit/IMG_3196.jpg" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">Id :{{productToShow.idProduit}}</h5>
+            <p class="card-text">Code : {{productToShow.codeProduit}}</p>
+            <p class="card-text">Prix Unitaire : {{productToShow.prixUnitaire}}</p>
+            <p class="card-text">Creation : {{detailproduct.datecreation}}</p>
+            <p class="card-text">Dernier Modification : {{detailproduct.dateDernierModification}}</p>
+            <p class="card-text">categorie Produit : {{detailproduct.categorieProduit}}</p>
+            <div>
+                <button class="btn btn-sm btn-warning" (click)="modal.close('Save click')"
+                    (click)="ModifierDetailProduit(detailproduct.idDetailProduit)">Update Detail Produit</button>
+                <button class="btn btn-sm btn-danger" (click)="modal.close('Save click')"
+                    (click)="deleteProduct(productToShow.idProduit)">Delete</button>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Ok</button>
+    </div>
+</ng-template>

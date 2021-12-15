@@ -1,0 +1,169 @@
+<div class="container">
+	<div class="row">
+		<div
+			class="col-md-6">
+			<!-- Search form -->
+			<form class="navbar-search navbar-search-light form-inline mr-sm-3 mt-3" id="navbar-search-main">
+				<div class="form-group">
+					<div class="input-group input-group-alternative input-group-merge">
+						<div class="input-group-prepend">
+							<span class="input-group-text">
+								<i class="fas fa-search"></i>
+							</span>
+						</div>
+						<input class="form-control" placeholder="Search" type="text" name="idRayon" [(ngModel)]="searchObject" (ngModelChange)="Search()">
+					</div>
+				</div>
+			</form>
+		</div>
+		<div class="col-md-1">
+			<div class="text-right p-3">
+				<button class="btn btn-warning" (click)="printReportexcel()">Excel</button>
+			</div>
+		</div>
+		<div class="col-md-1">
+			<div class="text-right p-3">
+				<button class="btn btn-warning" (click)="printReportPdf()">PDF</button>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div class="text-right p-3">
+				<button class="btn btn-success" (click)="open(mymodal)">Crée un Rayon</button>
+			</div>
+		</div>
+		
+	</div>
+</div>
+<!-- Navbar links -->
+
+<div class="table-responsive">
+	<table class="table align-items-center table-flush" id="rayons">
+		<thead class="thead-light">
+			<tr>
+				<th scope="col" class="sort" data-sort="id" (click)="sort('idRayon')">Id</th>
+				<th scope="col" class="sort" data-sort="status" (click)="sort('libelleRayon')">Lieblle Rayon</th>
+				<th scope="col" class="sort" data-sort="budget" (click)="sort('codeRayon')">Code Rayon</th>
+				<th scope="col">Actions</th>
+			</tr>
+		</thead>
+		<tbody class="list">
+			<tr *ngFor="let item of rayonsList | orderBy: key: reverse | paginate:{itemsPerPage:5, currentPage:p}; index as ind ">
+				<th scope="row">
+					<div class="media align-items-center">
+						<a href="#" class="avatar rounded-circle mr-3">
+							<img alt="Image placeholder" src="../../assets/img/logocart.png">
+						</a>
+						<div class="media-body">
+							<span class="name mb-0 text-sm">{{item.idRayon}}</span>
+						</div>
+					</div>
+				</th>
+				<td class="budget">
+					{{item.libelleRayon}}
+				</td>
+				<td class="budget">
+					{{item.codeRayon}}
+				</td>
+				<td class="">
+					<a (click)="openedit(edit, item)" class="table-action">
+						<i class="fas fa-edit"></i>
+					</a>
+					<a (click)="deleteRayon(item, item.idRayon)" class="table-action table-action-delete">
+						<i class="fas fa-trash" style="color:red;"></i>
+					</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+
+<!-- Card footer -->
+<div class="card-footer py-4">
+	<nav aria-label="...">
+		<pagination-controls class="pagination justify-content-end mb-0" (pageChange)="p = $event"></pagination-controls>
+	</nav>
+</div>
+
+<ng-template #edit let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">Editer un Rayon</h4>
+		<button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+			<span aria-hidden="true">×</span>
+		</button>
+	</div>
+
+	<div class="modal-body">
+		<div class="alert alert-danger" *ngIf="errorMessage">
+			<strong>Error!</strong>
+			{{errorMessage}}
+		</div>
+
+		<form class="new-event--form" #f="ngForm" (ngSubmit)="f.form.valid && saveRayon()">
+			<div class="form-group">
+				<label for="libelle">
+					Libelle Rayon</label>
+				<input type="text" id="libelle" placeholder="Libelle Rayon" name="libelle" class="form-control form-control-alternative" [(ngModel)]="rayon.libelleRayon" #libelle="ngModel" required/>
+				<div class="alert alert-danger mt-3" *ngIf="libelle.invalid && libelle.touched">
+					<small *ngIf="libelle.errors.required">Libelle Rayon is a required field</small>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="code">
+					Code Rayon</label>
+				<input type="text" id="code" placeholder="Code Rayon" name="code" class="form-control form-control-alternative" [(ngModel)]="rayon.codeRayon" #code="ngModel" required/>
+				<div class="alert alert-danger mt-3" *ngIf="code.invalid && code.touched">
+					<small *ngIf="code.errors.required">Code Rayon is a required field</small>
+				</div>
+			</div>
+
+
+			<input type="hidden" class="new-event--start"/>
+			<input type="hidden" class="new-event--end"/>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-success" [disabled]="f.invalid" (click)="editRayon()">Save</button>
+			</div>
+		</form>
+	</div>
+</ng-template>
+
+<ng-template #mymodal let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">Crée un Rayon</h4>
+		<button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+			<span aria-hidden="true">×</span>
+		</button>
+	</div>
+
+	<div class="modal-body">
+		<div class="alert alert-danger" *ngIf="errorMessage">
+			<strong>Error!</strong>
+			{{errorMessage}}
+		</div>
+
+		<form class="new-event--form" #f="ngForm" (ngSubmit)="f.form.valid && saveRayon()">
+
+			<div class="form-group">
+				<label for="libelle">
+					Libelle Rayon</label>
+				<input type="text" id="libelle" placeholder="Libelle Rayon" name="libelle" class="form-control form-control-alternative" [(ngModel)]="rayon.libelleRayon" #libelle="ngModel" required/>
+				<div class="alert alert-danger mt-3" *ngIf="libelle.invalid && libelle.touched">
+					<small *ngIf="libelle.errors.required">Libelle Rayon is a required field</small>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="code">
+					Code Rayon</label>
+				<input type="text" id="code" placeholder="Code Rayon" name="code" class="form-control form-control-alternative" [(ngModel)]="rayon.codeRayon" #code="ngModel" required/>
+				<div class="alert alert-danger mt-3" *ngIf="code.invalid && code.touched">
+					<small *ngIf="code.errors.required">Code Rayon is a required field</small>
+				</div>
+			</div>
+
+			<input type="hidden" class="new-event--start"/>
+			<input type="hidden" class="new-event--end"/>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-success" [disabled]="f.invalid" (click)="saveRayon()">Save</button>
+			</div>
+		</form>
+	</div>
+</ng-template>

@@ -1,0 +1,159 @@
+          <div class="card">
+            <!-- Card header -->
+            <div class="card-header">
+              <h3 class="mb-0">Ajouter un client</h3>
+            </div>
+            <!-- Card body -->
+            <div class="card-body">
+
+
+
+              <form ngForm #f="ngForm" (submit)="addClient()" >
+                <!-- Input groups with icon -->
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="form-label">Prénom</label>
+                      <div class="input-group input-group-merge">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text"><i class="fas fa-user"></i></span>
+                        </div>
+                        <input required class="form-control" name="prnom" placeholder="First-Name" type="text" [(ngModel)]="client.prenom"
+                        #fprenom="ngModel" minlength="3" pattern="[a-zA-Z]*">              
+                      </div>
+                    <div *ngIf="fprenom.errors">
+                        <div *ngIf="fprenom.errors.required && fprenom.touched" class="text-red"> Champ obligatoire</div>
+                        <div *ngIf="fprenom.errors.minlength" class="text-red">Minimum 3 caractéres</div>
+                        <div *ngIf="fprenom.errors.pattern" class="text-red">Format n'est pas respecté</div>
+                    </div>
+                    </div>
+                    
+                  </div>
+                  
+                  <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="form-label">Nom de la famille</label>
+                      <div class="input-group input-group-merge">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text"><i class="fas fa-user"></i></span>
+                        </div>
+                        <input required class="form-control" placeholder="Last-Name" name="nom" type="text" [(ngModel)]="client.nom"
+                         #fnom="ngModel" minlength="3">
+                      </div>
+                         <div *ngIf="fnom.errors">
+                          <div *ngIf="fnom.errors.required && fnom.touched" class="text-red"> Champ obligatoire</div>
+                          <div *ngIf="fnom.errors.minlength" class="text-red">Minimum 3 caractéres</div>
+                    </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-label">Email</label>
+                          <div class="input-group input-group-merge">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                            </div>
+                            <input required class="form-control" placeholder="Adresse Email" name="email" type="email" [(ngModel)]="client.email" 
+                            #femail="ngModel" pattern = "^[a-zA-Z0-9._-]+@[a-z]+.tn" minlength="7" >
+                          </div>
+                           <div *ngIf="femail.errors">
+                           <div *ngIf="femail.errors.required && femail.touched" class="text-red"> Champ obligatoire</div>
+                           <div *ngIf="femail.errors.minlength" class="text-red">Minimum 7 caractéres</div>
+                           <div *ngIf="femail.errors.pattern" class="text-red">Format n'est pas respecté</div>
+                          </div>
+                        </div>
+                      </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="form-label">Mot de passe</label>
+                      <div class="input-group input-group-merge">
+                        <input class="form-control" placeholder="Password" type="password" name="password" [(ngModel)]="client.password" 
+                        #fpassword="ngModel">
+                        <div class="input-group-append">
+                          <span class="input-group-text"><i class="fas fa-eye"></i></span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label class="form-label">Date de naissance</label>
+                        <div class="input-group input-group-merge">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-calendar"></i></span>
+                          </div>
+                          <input class="form-control" name="dateNaissance" type="date" [(ngModel)]="client.dateNaissance" #fdate="ngModel">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label class="form-label">Numéro de téléphone</label>
+                        <div class="input-group input-group-merge">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-globe-americas"></i></span>
+                          </div>
+                          <input class="form-control" placeholder="Phone number" name="telephone" type="text" [(ngModel)]="client.telephone" 
+                          #ftelephone="ngModel" minlength="8" maxlength="8" pattern="[0-9]*" required>
+                          <div class="input-group-append">
+                            <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                          </div>
+                        </div>
+                          <div *ngIf="ftelephone.errors">
+                           <div *ngIf="ftelephone.errors.required && ftelephone.touched" class="text-red"> Champ obligatoire</div>
+                           <div *ngIf="ftelephone.errors.minlength || ftelephone.errors.maxlength" class="text-red">8 chiffres</div>
+                           <div *ngIf="ftelephone.errors.pattern" class="text-red">Format n'est pas respecté</div>
+                          </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label class="form-label">Date de naissance</label>
+                        <div class="input-group input-group-merge">
+                          <input type="file" class="form-control" aria-label="file example" name="picture" required [(ngModel)]="client.picture"
+                          #fpicture="ngModel" >
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <label class="form-label">Profession</label>
+                      <select class="form-control" aria-label="Default select example" name="profession" [(ngModel)]="client.profession" 
+                      #fprofession="ngModel" required>
+                        <option value="ETUDIANT">ETUDIANT</option>
+                        <option value="DOCTEUR">DOCTEUR</option>
+                        <option value="INGENIEUR">INGENIEUR</option>
+                        <option value="COMMERCIAL">COMMERCIAL</option>
+                        <option value="CADRE">CADRE</option>
+                        <option value="AUTRE">AUTRE</option>
+                      </select>
+                      </div>
+                  </div>
+                  <div class="row">
+                  <div class="col-md-6">
+                    <label class="form-label">Catégorie client</label>
+                  <select class="form-control" aria-label="Default select example" name="categorieClient" [(ngModel)]="client.categorieClient"
+                  #fcategorie="ngModel" required>
+                    <option value="FIDELE">FIDELE</option>
+                    <option value="ORDINAIRE">ORDINAIRE</option>
+                    <option value="PREMIUM">PREMIUM</option>
+                  </select>
+                  </div>
+                  <div class="col-md-6 ">
+                 
+                    <br>
+  
+                      
+                        <button class="btn btn-primary" type="submit" [disabled]="f.invalid">Ajouter</button>
+                     
+                  
+                 
+                    </div> 
+                  </div>            
+                    
+                </form>

@@ -1,0 +1,32 @@
+<div class="card">
+    <!-- Card header -->
+    <div class="card-header">
+        <h3 class="mb-0">Modifier Fournisseur</h3>
+    </div>
+    <div class="row">  
+    <div class="col-sm-4"></div>  
+    <div class="col-sm-4" >
+    <!-- Card body -->
+    <div class="card-body">
+  <form #f="ngForm" (submit)="save2()">
+    <div class="mb-3">
+        <label class="form-label"></label>
+        </div>
+   
+    <div class="mb-3">
+        <label class="form-label">libelle Fournisseur</label>
+        <input name="libelleFornisseur"required [(ngModel)]="fournisseur.libelleFornisseur" #libelleFornisseur="ngModel" type="text" class="form-control">
+    </div>
+   
+    <div class="mb-3">
+        <label class="form-label">code Fournisseur</label>
+        <input name="codeFornisseur" required [(ngModel)]="fournisseur.codeFornisseur" #codeFornisseur="ngModel" type="text" class="form-control">
+    </div>
+    
+    
+    <button type="submit" class="btn btn-primary" [disabled]="f.invalid">Submit</button>
+  </form>
+  </div>
+  </div>
+  </div>
+  </div>

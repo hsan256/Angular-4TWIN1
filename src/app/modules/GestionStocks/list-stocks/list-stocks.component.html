@@ -1,0 +1,198 @@
+<div class="container">
+	<div class="row">
+		<div
+			class="col-md-6">
+			<!-- Search form -->
+			<form class="navbar-search navbar-search-light form-inline mr-sm-3 mt-3" id="navbar-search-main">
+				<div class="form-group">
+					<div class="input-group input-group-alternative input-group-merge">
+						<div class="input-group-prepend">
+							<span class="input-group-text">
+								<i class="fas fa-search"></i>
+							</span>
+						</div>
+						<input class="form-control" placeholder="Search" type="text" name="idStock" [(ngModel)]="searchObject" (ngModelChange)="Search()">
+					</div>
+				</div>
+			</form>
+		</div>
+		<div class="col-md-6">
+			<div class="text-right p-3">
+				<button class="btn btn-success" (click)="open(mymodal)">Crée un Stock</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Navbar links -->
+<div class="table-responsive">
+	<table class="table align-items-center table-flush">
+		<thead class="thead-light">
+			<tr>
+				<th scope="col" class="sort"  data-sort="id" (click)="sort('idStock')">Id</th>
+				<th scope="col" class="sort"  data-sort="id" (click)="sort('libelleStock')">Libelle Stock</th>
+				<th scope="col" class="sort"  data-sort="id" (click)="sort('qteStock')">Quantite Stock</th>
+				<th scope="col" class="sort"  data-sort="id" (click)="sort('qteMin')">Quantite Minimum</th>
+				<th scope="col" class="sort">Status</th>
+				<th scope="col">Actions</th>
+			</tr>
+		</thead>
+		<tbody class="list">
+			<tr *ngFor="let item of stocksList | orderBy: key: reverse; let i = index">
+				<th scope="row">
+					<div class="media-body">
+						<span class="name mb-0 text-sm">{{item.idStock}}</span>
+					</div>
+				</th>
+				<td class="budget">
+					{{item.libelleStock}}
+				</td>
+				<td>
+					<span class="badge badge-dot mr-4">
+						<span class="status">{{item.qteStock}}</span>
+					</span>
+				</td>
+				<td>
+					<span class="badge badge-dot mr-4">
+						<span class="status">{{item.qteMin}}</span>
+					</span>
+				</td>
+				<td>
+					<span class="badge badge-dot mr-4">
+                    <div *ngIf="statusStock(i) == 'warning'">
+						<i class="bg-warning"></i>
+						<span class="status">Hors Stock</span>
+                    </div>
+                    <div *ngIf="statusStock(i) == 'success'">
+						<i class="bg-success"></i>
+						<span class="status">En Stock</span>
+                    </div>
+					</span>
+				</td>
+				<td class="">
+					<a (click)="openedit(edit, item)" class="table-action">
+						<i class="fas fa-edit"></i>
+					</a>
+					<a (click)="deleteStock(item, item.idStock)" class="table-action table-action-delete">
+						<i class="fas fa-trash" style="color:red;"></i>
+					</a>
+					<a (click)="decrementStock(i)" class="table-action table-action-delete">
+                    
+						<i class="fas fa-minus" style="color:red;"></i>
+					</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+
+<!-- Card footer -->
+<div class="card-footer py-4">
+	<nav aria-label="...">
+		<pagination-controls class="pagination justify-content-end mb-0" (pageChange)="p = $event"></pagination-controls>
+	</nav>
+</div>
+
+<ng-template #edit let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">Editer un Stock</h4>
+		<button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+			<span aria-hidden="true">×</span>
+		</button>
+	</div>
+
+	<div class="modal-body">
+		<div class="alert alert-danger" *ngIf="errorMessage">
+			<strong>Error!</strong>
+			{{errorMessage}}
+		</div>
+
+		<form class="new-event--form" #f="ngForm" (ngSubmit)="f.form.valid && editStock()">
+			<div class="form-group">
+				<label for="libelle">
+					Libelle Stock</label>
+				<input type="text" id="libelle" placeholder="Libelle Stock" name="libelle" class="form-control form-control-alternative" [(ngModel)]="stock.libelleStock" #libelle="ngModel" required/>
+				<div class="alert alert-danger mt-3" *ngIf="libelle.invalid && libelle.touched">
+					<small *ngIf="libelle.errors.required">Libelle Stock is a required field</small>
+				</div>
+			</div>
+
+            <div class="form-group">
+				<label for="quantiteMin">
+					Quantité Minimum du Stock</label>
+				<input type="number" id="quantiteMin" placeholder="Quantité Minimum du Stock" name="quantiteMin" class="form-control form-control-alternative" [(ngModel)]="stock.qteMin" #quantiteMin="ngModel" required/>
+				<div class="alert alert-danger mt-3" *ngIf="quantiteMin.invalid && quantiteMin.touched">
+					<small *ngIf="quantiteMin.errors.required">Quantite Minimum Stock is a required field</small>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label for="quantite">
+					Quantité Stock</label>
+				<input type="number" id="quantite" placeholder="Quantité Stock" name="quantite" class="form-control form-control-alternative" [(ngModel)]="stock.qteStock" #quantite="ngModel" required/>
+				<div class="alert alert-danger mt-3" *ngIf="quantite.invalid && quantite.touched">
+					<small *ngIf="quantite.errors.required">Quantite Stock is a required field</small>
+				</div>
+			</div>
+            
+			<input type="hidden" class="new-event--start"/>
+			<input type="hidden" class="new-event--end"/>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-success" [disabled]="f.invalid" (click)="saveStock()">Save</button>
+			</div>
+		</form>
+	</div>
+</ng-template>
+
+<ng-template #mymodal let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">Crée un Stock</h4>
+		<button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+			<span aria-hidden="true">×</span>
+		</button>
+	</div>
+
+	<div class="modal-body">
+		<div class="alert alert-danger" *ngIf="errorMessage">
+			<strong>Error!</strong>
+			{{errorMessage}}
+		</div>
+
+		<form class="new-event--form" #f="ngForm" (ngSubmit)="f.form.valid && saveStock()">
+			<div class="form-group">
+				<label for="libelle">
+					Libelle Stock</label>
+				<input type="text" id="libelle" placeholder="Libelle Stock" name="libelle" class="form-control form-control-alternative" [(ngModel)]="stock.libelleStock" #libelle="ngModel" required/>
+				<div class="alert alert-danger mt-3" *ngIf="libelle.invalid && libelle.touched">
+					<small *ngIf="libelle.errors.required">Libelle Stock is a required field</small>
+				</div>
+			</div>
+
+            <div class="form-group">
+				<label for="quantiteMin">
+					Quantité Minimum du Stock</label>
+				<input type="number" id="quantiteMin" placeholder="Quantité Minimum du Stock" name="quantiteMin" class="form-control form-control-alternative" [(ngModel)]="stock.qteMin" #quantiteMin="ngModel" required/>
+				<div class="alert alert-danger mt-3" *ngIf="quantiteMin.invalid && quantiteMin.touched">
+					<small *ngIf="quantiteMin.errors.required">Quantite Stock is a required field</small>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label for="quantite">
+					Quantité Stock</label>
+				<input type="number" id="quantite" placeholder="Quantité Stock" name="quantite" class="form-control form-control-alternative" [(ngModel)]="stock.qteStock" #quantite="ngModel" required/>
+				<div class="alert alert-danger mt-3" *ngIf="quantite.invalid && quantite.touched">
+					<small *ngIf="quantite.errors.required">Quantite Stock is a required field</small>
+				</div>
+                <div class="alert alert-danger mt-3" *ngIf="quantite.value < quantiteMin.value">
+                    <small>Quantite Stock doit être superieur a quantiteMin</small>
+                </div>
+			</div>
+            
+			<input type="hidden" class="new-event--start"/>
+			<input type="hidden" class="new-event--end"/>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-success" [disabled]="f.invalid" (click)="saveStock()">Save</button>
+			</div>
+		</form>
+	</div>
+</ng-template>

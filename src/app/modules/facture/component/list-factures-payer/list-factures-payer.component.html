@@ -1,0 +1,38 @@
+<div class="table-responsive py-4">
+    <input class="form-control col-md-3" placeholder="Search" type="text" [(ngModel)]="searchVal" (keyup)="searchPaidFacture()">
+    <table class="table table-flush" id="datatable-buttons">
+      <thead class="thead-light">
+        <tr>
+          <th (click)="sort()">Client <i class="fa fa-sort"></i></th>
+          <th>Invoice Date</th>
+          <th>Total Amount</th>
+          <th>Paid or Not</th>
+          <th>Consult</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tfoot>
+        <tr>
+          <th>Client</th>
+          <th>Invoice Date</th>
+          <th>Total Amount</th>
+          <th>Paid or Not</th>
+          <th>Consult</th>
+          <th>Delete</th>
+        </tr>
+      </tfoot>
+      <tbody>
+        <tr *ngFor="let f of listFactures | orderBy : key : reverse | paginate:{itemsPerPage:5, currentPage:page}">
+            <td *ngIf="f.client">{{f.client.nom}} {{f.client.prenom}}</td>
+            <td *ngIf="!f.client">No Client Specified yet</td>
+          <td>{{f.dateFacture}}</td>
+          <td>{{f.montantTotal}}</td>
+          <td *ngIf="f.active"><p style="color: red;">Not Paid</p> </td>
+          <td *ngIf="!f.active"><p style="color: green;">Paid</p> </td>
+          <td><button class="btn btn-sm btn-primary" (click)="updateFacture(f.idFacture)">View</button></td>
+          <td><button class="btn btn-sm btn-danger" (click)="deleteFacture(f.idFacture)">Delete</button></td>
+        </tr>
+      </tbody>
+      <pagination-controls (pageChange)="page= $event"></pagination-controls>
+    </table>
+  </div>
